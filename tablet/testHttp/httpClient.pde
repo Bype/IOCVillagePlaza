@@ -5,16 +5,16 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
 public class TestHttpGet {
-    public void executeHttpGet() throws Exception {
+    public String executeHttpGet() throws Exception {
         BufferedReader in = null;
         try {
             HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
-            request.setURI(new URI("http://stream.david-o.net/txt/text.txt"));
+            request.setURI(new URI("http://192.168.1.79:8000/text/welcome/fr/1/"));
             HttpResponse response = client.execute(request);
-            in = new BufferedReader
-            (new InputStreamReader(response.getEntity().getContent()));
+            in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             StringBuffer sb = new StringBuffer("");
             String line = "";
             String NL = System.getProperty("line.separator");
@@ -22,8 +22,7 @@ public class TestHttpGet {
                 sb.append(line + NL);
             }
             in.close();
-            String page = sb.toString();
-            System.out.println(page);
+            return sb.toString();
             } finally {
             if (in != null) {
                 try {

@@ -5,7 +5,9 @@ from tcontent.models import Text
 from django.http import HttpResponse
 
 def index(request, topic, lang, page):
+    
     text = Text.objects.get(lang=lang,
                             page=Page.objects.get(pos=page,
                                                   topic=Topic.objects.get(name=topic))).text
-    return HttpResponse(text)
+    text = text.replace('\\n','\n'); 
+    return HttpResponse(text,mimetype="text/plain")
