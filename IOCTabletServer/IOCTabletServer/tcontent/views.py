@@ -61,17 +61,18 @@ def image(request, topic, lang, page):
             ypos += text_size_y
         
     ''' A View that Returns a PNG Image generated using PIL'''
+   # tab = Image.open('static/tab.png',)
     image = Image.open('static/'+ topic + "/"+Page.objects.get(pos=page, topic=Topic.objects.get(name=topic)).image)
     title = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).title
     text = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).text
-    text = text.replace('\\n', '\n'); 
-    im = Image.new('RGB', (800, 1280), (258, 248, 248, 255))
+    im = Image.new('RGBA', (800, 1280), (248, 248, 248, 255))
     draw = ImageDraw.Draw(im)
-    im.paste(image,(0,0))   
+    im.paste(image,(0,0))
+   # im.paste(tab,(0,0),tab)      
     textFont = ImageFont.truetype("fonts/HelveticaLTStd-Roman.otf", 24)
     titleFont = ImageFont.truetype("fonts/HelveticaNeueLTCom-BlkCn.ttf", 50)
-    draw.text((50, 750), title, font=titleFont, fill=(32, 32, 32, 255))
-    draw_word_wrap(draw, text, 50, 820, 700, font=textFont, fill=(32, 32, 32, 255))
+    draw.text((50, 700), title, font=titleFont, fill=(32, 32, 32, 255))
+    draw_word_wrap(draw, text, 50, 750, 700, font=textFont, fill=(32, 32, 32, 255))
     del draw # I'm done drawing so I don't need this anymore
     # We need an HttpResponse object with the correct mimetype
     response = HttpResponse(mimetype="image/png")
