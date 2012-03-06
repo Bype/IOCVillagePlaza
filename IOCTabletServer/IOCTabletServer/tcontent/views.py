@@ -1,22 +1,24 @@
 # Create your views here.
-from tcontent.models import Topic
-from tcontent.models import Page
-from tcontent.models import Text
+from models import Topic
+from models import Page
+from models import Text
 from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 def text(request, topic, lang, page):
-    
-    text = Text.objects.get(lang=lang,
-                            page=Page.objects.get(pos=page,
-                                                  topic=Topic.objects.get(name=topic))).text
-    text = text.replace('\\n', '\n'); 
+    try:
+        text = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).text
+        text = text.replace('\\n', '\n'); 
+    except ObjectDoesNotExist:
+        text = "Not found"
     return HttpResponse(text, mimetype="text/plain")
 
 def title(request, topic, lang, page):
-    title = Text.objects.get(lang=lang,
-                            page=Page.objects.get(pos=page,
-                                                  topic=Topic.objects.get(name=topic))).title
-    title = title.replace('\\n', '\n'); 
+    try:
+        title = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).title
+        title = title.replace('\\n', '\n'); 
+    except ObjectDoesNotExist:
+        title = "Not found"
     return HttpResponse(title, mimetype="text/plain")
 
 def imageurl(request, topic, lang, page):
@@ -42,7 +44,7 @@ def image(request, topic, lang, page):
         # split on whitespace...    
         for word in text.split(None):
             word_width, word_height = draw.textsize(word, font=font)
-            if( word_width + space_width > remaining or word=='<br>'):
+            if(word_width + space_width > remaining or word == '<br>'):
                 output_text.append(word)
                 remaining = max_width - word_width
             else:
@@ -61,14 +63,13 @@ def image(request, topic, lang, page):
             ypos += text_size_y
         
     ''' A View that Returns a PNG Image generated using PIL'''
-   # tab = Image.open('static/tab.png',)
-    image = Image.open('static/'+ topic + "/"+Page.objects.get(pos=page, topic=Topic.objects.get(name=topic)).image)
+  
+    image = Image.open('static/' + topic + "/" + Page.objects.get(pos=page, topic=Topic.objects.get(name=topic)).image)
     title = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).title
     text = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).text
     im = Image.new('RGBA', (800, 1280), (248, 248, 248, 255))
     draw = ImageDraw.Draw(im)
-    im.paste(image,(0,0))
-   # im.paste(tab,(0,0),tab)      
+    im.paste(image, (0, 0))
     textFont = ImageFont.truetype("fonts/HelveticaLTStd-Roman.otf", 24)
     titleFont = ImageFont.truetype("fonts/HelveticaNeueLTCom-BlkCn.ttf", 50)
     draw.text((50, 700), title, font=titleFont, fill=(32, 32, 32, 255))

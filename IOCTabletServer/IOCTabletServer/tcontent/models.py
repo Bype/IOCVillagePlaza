@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your models here.
 class Topic(models.Model):
@@ -12,7 +12,10 @@ class Page(models.Model):
     pos = models.IntegerField()
     image = models.CharField(max_length=64)
     def __unicode__(self):
-        return u'%s > %s > %s' % (self.topic.name, self.pos, Text.objects.get(lang='en', page=self).title)
+        try:
+            return u'%s > %s > %s' % (self.topic.name, self.pos, Text.objects.get(lang='en', page=self).title)
+        except ObjectDoesNotExist:
+            return u'%s > %s > ?' % (self.topic.name, self.pos)
     
 
 class Text(models.Model):

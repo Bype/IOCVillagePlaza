@@ -3,8 +3,8 @@ int x=0;
 int initX=0;
 int n=0;
 
-int nbImg = 8;
-int nbSec =  nbImg*6;
+int nbImg = 7;
+int nbSec =  nbImg*8;
 int rX[] = new int[nbSec+1];
 int rY[] = new int[nbSec+1];
 int rT[] = new int[nbSec+1];
@@ -76,16 +76,18 @@ void randomize()
   rT[nbSec] = height/32;
 }
 
-
+PImage tab;
 
 void setup()
 {
-  size(800, 1280);
+  size(800, 1280,P2D);
   frameRate(60);
-  for (int i=0;i<=nbImg;i++)
+  for (int i=0;i<nbImg;i++)
   {
-    rI[i]=loadImage("drawing"+i+".jpg");
+    rI[i]=loadImage("http://192.168.1.79:8000/image/museum/en/"+int(i+1)+".png");
   }
+   rI[nbImg] = loadImage("http://192.168.1.79:8000/media/common/home.jpg");
+  tab=loadImage("http://192.168.1.79:8000/media/common/en/tab.png");
   randomize();
   noStroke();
   smooth();
@@ -93,10 +95,11 @@ void setup()
 
 void draw()
 {
-  background(250);
+  background(248);
   int virPosX = n*width-x;
   image(rI[int(virPosX/width)], x, 0);
   image(rI[int(virPosX/width)+1], width+x, 0);
+  image(tab,0,0);
   if ( -(width/2) < x)
   {
     if ( (mousePressed) && (0 < initX-mouseX))
@@ -129,12 +132,12 @@ void draw()
 
   aRad += 0.01f;
   if (TWO_PI < aRad)
-    aRad = 0.f;
+    aRad = 0.0003f;
 
   float aSinus = sin(aRad);
   float aCosinus = cos(aRad);
 
-  fill(color(240));
+  fill(color(248));
   beginShape();
   vertex(0, height/2+40);
   for (int i=0;i<nbSec;i++)
