@@ -22,7 +22,7 @@ admin.site.register(Text, TextAdmin)
 
 
 class PageAdmin(admin.ModelAdmin):
-    fields = ('topic', 'pos','title', 'image')
+    fields = ('topic', 'pos', 'image')
     list_filter = ('topic__name',)
     ordering=('pos',)
     inlines=[TextInline,]
