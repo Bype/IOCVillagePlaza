@@ -80,26 +80,26 @@ PImage tab;
 
 void setup()
 {
-  size(800, 1280,P2D);
+  size(800, 1280, P2D);
   frameRate(60);
   for (int i=0;i<nbImg;i++)
   {
-    rI[i]=loadImage("http://192.168.1.79:8000/image/museum/en/"+int(i+1)+".png");
+    rI[i]=loadImage(int(i+1)+".png");
   }
-   rI[nbImg] = loadImage("http://192.168.1.79:8000/media/common/home.jpg");
-  tab=loadImage("http://192.168.1.79:8000/media/common/en/tab.png");
+  rI[nbImg] = loadImage("home.jpg");
+  tab=loadImage("tab.png");
   randomize();
   noStroke();
   smooth();
 }
-
+int aShift=0;
 void draw()
 {
   background(248);
   int virPosX = n*width-x;
   image(rI[int(virPosX/width)], x, 0);
   image(rI[int(virPosX/width)+1], width+x, 0);
-  image(tab,0,0);
+  image(tab, 0, 0);
   if ( -(width/2) < x)
   {
     if ( (mousePressed) && (0 < initX-mouseX))
@@ -130,24 +130,19 @@ void draw()
     }
   }
 
-  aRad += 0.01f;
-  if (TWO_PI < aRad)
-    aRad = 0.0003f;
-
-  float aSinus = sin(aRad);
-  float aCosinus = cos(aRad);
-
   fill(color(248));
+  aShift++;
+  int rubPosX=virPosX+aShift;
   beginShape();
   vertex(0, height/2+40);
   for (int i=0;i<nbSec;i++)
   {
 
-    if (virPosX < rX[i+1])
+    if (rubPosX < rX[i+1])
     {
-      if (rX[i-1] < virPosX + 4*width/3)
+      if (rX[i-1] < rubPosX + 4*width/3)
       {
-        vertex(aCosinus*width/16+rX[i]-virPosX, aSinus*height/48+rY[i]);
+        vertex(rX[i]-rubPosX, rY[i]);
       }
       else
         break;
@@ -159,18 +154,18 @@ void draw()
   for (int i=1;i<nbSec;i++)
   {
 
-    if (virPosX < rX[i+1])
+    if (rubPosX < rX[i+1])
     {
-      if (rX[i-1] < virPosX + 4*width/3)
+      if (rX[i-1] < rubPosX + 4*width/3)
       {
 
 
         fill(rC[i]);
         beginShape();
-        vertex(aCosinus*width/16+rX[i-1]-virPosX, aSinus*height/48+rY[i-1]);
-        vertex(aCosinus*width/16+rX[i]-virPosX, aSinus*height/48+rY[i]);
-        vertex(rX[i]-virPosX+aSinus*rA[i]*rT[i]/100, rY[i] + rT[i]);
-        vertex(rX[i-1]-virPosX+aSinus*rA[i-1]*rT[i-1]/100, rY[i-1] + rT[i-1]);
+        vertex(rX[i-1]-rubPosX, rY[i-1]);
+        vertex(rX[i]-rubPosX, rY[i]);
+        vertex(rX[i]-rubPosX+rA[i]*rT[i]/100, rY[i] + rT[i]);
+        vertex(rX[i-1]-rubPosX+rA[i-1]*rT[i-1]/100, rY[i-1] + rT[i-1]);
         endShape(CLOSE);
       }
       else
