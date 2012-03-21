@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openni>
+
+    <depth>
+        <near value="100" />
+        <far value="1500" />
+    </depth>
+    
+    <filter value="0.1" />
+    
+    <contour>
+    
+        <areaRadius>
+            <min value="50" />
+            <max value="500" />
+        </areaRadius>
+        
+        <threshold value="127" />
+        
+    </contour>
+                
+</openni>
