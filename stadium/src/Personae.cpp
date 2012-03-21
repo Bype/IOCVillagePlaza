@@ -26,7 +26,7 @@ Personae::~Personae() {
 void Personae::load() {
     
     // go into folder to get saved faces
-    string filepath = ofToDataPath("players/");
+    string filepath = ofToDataPath("players/athletes/");
     string filename = "";
     
     ofDirectory dir;
@@ -108,7 +108,7 @@ void Personae::addFace(Face &face) {
     
     // first, create a folder to hold this persona
     
-    string filepath = ofToDataPath("players/");
+    string filepath = ofToDataPath("players/athletes/");
     string filename = "";
     
     int year = ofGetYear();
