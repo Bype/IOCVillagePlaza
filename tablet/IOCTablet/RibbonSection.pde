@@ -1,4 +1,3 @@
-color iColor[] = new color[4];
 
 class RibbonSection
 {
@@ -29,12 +28,12 @@ class RibbonSection
   }
   void drawPercentFrom(RibbonSection aRS, int aPercent)
   {
-    PVector tP1 = PVector.sub(p1,aRS.p1);
+    PVector tP1 = PVector.sub(p1, aRS.p1);
     tP1.mult(aPercent/100.);
-    PVector tP2 = PVector.sub(p2,aRS.p2);
+    PVector tP2 = PVector.sub(p2, aRS.p2);
     tP2.mult(aPercent/100.);
-    PVector tRP1 = PVector.add(aRS.p1,tP1);
-    PVector tRP2 = PVector.add(aRS.p2,tP2);    
+    PVector tRP1 = PVector.add(aRS.p1, tP1);
+    PVector tRP2 = PVector.add(aRS.p2, tP2);    
     fill(iColor[theC]);
     noStroke();
     beginShape();
@@ -43,6 +42,7 @@ class RibbonSection
     vertex(tRP2.x, tRP2.y);
     aRS.vP2();
     endShape(CLOSE);
+    
   }
 }
 

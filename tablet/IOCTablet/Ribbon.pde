@@ -10,20 +10,25 @@ class Ribbon
     theSection = new RibbonSection[nb];
   }
 
+  void addSection(int x1, int y1, int x2, int y2, int aC)
+  {
+    theSection[curPos] = new RibbonSection(x1, y1, x2, y2, aC);
+    curPos++;
+  }
   void addSection(int x1, int y1, int x2, int y2)
   {
-    color tC=0;
+    int tC=0;
+
     if (0 != curPos% 2)
     {
       tC= (curPos%6)%3+1;
     }
-    theSection[curPos] = new RibbonSection(x1, y1, x2, y2, tC);
-    curPos++;
+    addSection(x1, y1, x2, y2, tC);
   }
 
   void drawSection(int index)
   {
-    if ( 0 <index)
+    if (( 0 <index)&&(index < theSection.length))
     {
       theSection[index].drawFullFrom(theSection[index-1]);
     }
@@ -67,10 +72,9 @@ class Ribbon
     if (animPercent<100)
     {
       if (0==animIndex%2)
-        animPercent+=2;
+        animPercent+=-(animPercent-120)/8;
       else
-        animPercent++;
-      
+        animPercent+=(120-animPercent)/12;
     }
     else
     {
