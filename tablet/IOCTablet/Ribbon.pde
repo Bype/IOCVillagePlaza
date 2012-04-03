@@ -1,133 +1,90 @@
 class Ribbon
 {
-  int rX[]; // top.left x pos
-  int rY[]; // top.left y pos
-  int rH[]; // height  
-  int rA[]; // angle
-  color rC[]; // color
-  int rNb; //nb of segment
-  color rBlue = color(0, 153, 255), 
-  rOrange = color(255, 85, 0), 
-  rPink =  color(223, 0, 148), 
-  rBurgundy = color(68, 25, 59);
+  RibbonSection theSection[];
+  int curPos = 0;
+  int animIndex =1;
+  int animPercent =0;
 
-  Ribbon(int aNb) {
-    rNb = aNb;
-    rX = new int[aNb+1];
-    rY = new int[aNb+1];
-    rH = new int[aNb+1];
-    rA = new int[aNb+1];
-    rC = new color[aNb+1];
+  Ribbon(int nb)
+  {
+    theSection = new RibbonSection[nb];
   }
 
-  void randomize()
+  void addSection(int x1, int y1, int x2, int y2)
   {
-    // Initial Segment  
-    rX[0]=-100;
-    rY[0] = height/2;
-    rH[0] = height/32;
-    rC[0] = rBlue;
-    rA[0] = 0;
-
-    for (int i=1;i<rNb;i++)
+    color tC=0;
+    if (0 != curPos% 2)
     {
-      if (i%2 == 0)
-        // even index : long
-      {  
-        rX[i] = rX[i-1] + 3*int(random(width/16, width/6));
-        rH[i] = int(random(height/16, height/12));
+      tC= (curPos%6)%3+1;
+    }
+    theSection[curPos] = new RibbonSection(x1, y1, x2, y2, tC);
+    curPos++;
+  }
 
-        switch (i%6)
-          // iterate throu the 3 kind of long segment
-        {
-        case 0:     
-          rC[i] = rBlue; 
-          rA[i] = 50;
-          rY[i] = height/2 -height/32;
-          break;
-        case 2: 
-          rC[i] = rPink;
-          rA[i] = 30;
-          rY[i] = height/2 - height/24;
-          break;
-        case 4:
-          rC[i] = rOrange;
-          rA[i] = 100;
-          rY[i] = height/2 -height/16;
-          break;
-        }
+  void drawSection(int index)
+  {
+    if ( 0 <index)
+    {
+      theSection[index].drawFullFrom(theSection[index-1]);
+    }
+  }
+
+  void drawFull(int index)
+  {
+    for (int i=2;i<index;i+=2)
+    {
+      drawSection(i);
+    }
+    for (int i=1;i<index;i+=2)
+    {
+      drawSection(i);
+    }
+  }
+
+  void drawPercentTo(int index, int percent)
+  {
+    if (0 ==index%2)
+    {
+      theSection[index].drawPercentFrom(theSection[index-1], percent);
+      drawFull(index);
+    }
+    else
+    {
+      drawFull(index);
+      theSection[index].drawPercentFrom(theSection[index-1], percent);
+    }
+  }
+
+  void resetAnimation()
+  {
+    animIndex = 1;
+    animPercent = 0;
+  }
+
+  boolean doAnimate()
+  {
+    drawPercentTo(animIndex, animPercent);
+    if (animPercent<100)
+    {
+      if (0==animIndex%2)
+        animPercent+=2;
+      else
+        animPercent++;
+      
+    }
+    else
+    {
+      if (animIndex<(theSection.length-1))
+      {
+        animPercent=0;
+        animIndex++;
       }
       else
-        // odd index : small
       {
-        rY[i] = height/2;
-        rA[i] = 120;        
-        rH[i] = int(random(height/24, height/16));
-        rC[i] = rBurgundy;
-        if (i%3 == 0)
-        {
-          rX[i] = rX[i-1] +  int(random(width/24, width/16));
-        }
-        else
-        {
-          rX[i] = rX[i-1] +  int(random(-width/20, 0));
-        }
-      }
-      rY[i]=rY[i]-20;
-    }
-    rX[rNb]=400*8;
-    rY[rNb] = height/2;
-    rA[rNb] = 0;
-    rH[rNb] = height/32;
-  }
-
-  void draw(int aXa, int aXb)
-  {
-    for (int i=1;i<rNb;i++)
-    {
-      if (aXa < rX[i+1])
-      {
-        
-        if (rX[i-1] < aXb)
-        {
-          /*
-          fill(rC[i]);
-          noStroke();
-          beginShape();
-          vertex(rX[i-1]-aXa, rY[i-1]);
-          vertex(rX[i]-aXa, rY[i]);
-          vertex(rX[i]-aXa+rA[i]*rH[i]/100, rY[i] + rH[i]);
-          vertex(rX[i-1]-aXa+rA[i-1]*rH[i-1]/100, rY[i-1] + rH[i-1]);
-          endShape(CLOSE);
-          */
-        }
-        else
-          break;
-       
-        if (aXb<rX[i])
-        {
-          fill(rC[i]);
-          noStroke();
-          beginShape();
-          vertex(rX[i-1]-aXa, rY[i-1]);
-          vertex(aXb-aXa, rY[i]);
-          vertex(aXb-aXa+rA[i]*rH[i]/100, rY[i] + rH[i]);
-          vertex(rX[i-1]-aXa+rA[i-1]*rH[i-1]/100, rY[i-1] + rH[i-1]);
-          endShape(CLOSE);
-        }
-        else
-        {
-          fill(rC[i]);
-          noStroke();
-          beginShape();
-          vertex(rX[i-1]-aXa, rY[i-1]);
-          vertex(rX[i]-aXa, rY[i]);
-          vertex(rX[i]-aXa+rA[i]*rH[i]/100, rY[i] + rH[i]);
-          vertex(rX[i-1]-aXa+rA[i-1]*rH[i-1]/100, rY[i-1] + rH[i-1]);
-          endShape(CLOSE);
-        }
+        return false;
       }
     }
+    return true;
   }
 }
 
