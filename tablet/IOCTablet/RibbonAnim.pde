@@ -37,7 +37,8 @@ class EnglishConnection extends Sequence
         yShift-=-(-900+yShift)/180;
     }
     translate(0, yShift);
-    image(theImg, 0, -800);
+    if(0<yShift)
+      image(theImg, 0, -800);
     if (!tagRibbon.doAnimate())
       return new ActivitiesPage("en");
     return this;

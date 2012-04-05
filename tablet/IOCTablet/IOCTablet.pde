@@ -4,7 +4,25 @@ Sequence currentSeq;
 
 void setup()
 {
-  size(1280, 800);
+
+  try {
+    Process  proc = Runtime.getRuntime().exec(new String[] {
+      "su", "-c", "service call activity 79 s16 com.android.systemui"
+    }
+    );
+
+    try
+    {
+      proc.waitFor();
+    }
+    catch (java.lang.InterruptedException e)
+    {
+    }
+  }
+  catch(java.io.IOException e)
+  {
+  }
+  size(1280, 800, A3D);
   frameRate(60);
   iColor[0] = color(68, 25, 59);// Burgundy
   iColor[1] = color(255, 85, 0);// Orange
