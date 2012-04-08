@@ -17,10 +17,10 @@ class ContentPages extends ImagePage
     tNb = nb;
     tLang = aLang;
     tContent = aContent;
-    shiftY =0;
     addATouchZone(0, 0, 230, 120, theHomePage);
     prevImg = aImg;
     tRibbon = aRibbon;
+    shiftY =0;
   }
   Sequence draw()
   {
@@ -34,16 +34,19 @@ class ContentPages extends ImagePage
     image(tagImg, 0, -shiftY);
     if (mousePressed)
     {
+      
       if ((mouseY-pmouseY)<0)
         shiftY += (mouseY-pmouseY);
+        
       if (shiftY<-800)
         shiftY=-800;
+        
     }
     else
     {
       if (shiftY < -500)
       {
-        if (-800 < shiftY)
+        if (-794 < shiftY)
         {
           shiftY -= (800 + shiftY)/4 ;
         }

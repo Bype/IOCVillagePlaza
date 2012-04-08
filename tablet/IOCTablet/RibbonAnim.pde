@@ -22,9 +22,14 @@ class ActivitiesConnection extends Sequence
     tagRibbon.addSection(72, 904, 56, 936);
     tagRibbon.addSection(96, 948, 88, 976);
     tagRibbon.addSection(0, 960, 0, 996);
-    tagRibbon.resetAnimation();
     nextSeq = new ActivitiesPage(aLang);
-    yShift=800;
+    setup();
+   
+  }
+  void setup()
+  {
+     tagRibbon.resetAnimation();
+     yShift=800;
   }
   Sequence draw()
   {
@@ -40,9 +45,8 @@ class ActivitiesConnection extends Sequence
       image(getImg(), 0, -800);
     else
       freeImage();
-    if (!tagRibbon.doAnimate())
+    if (!tagRibbon.doAnimateRecover())
     {
-      tagRibbon.resetAnimation();
       return nextSeq;
     }
     return this;
@@ -67,6 +71,11 @@ class ContentConnection extends Sequence
     yShift=800;
     lastImg = anImage;
     tRibbon =new AutoRibbon(x1, 0, x2, 0, 5, 550, 800, 600, 800,10);
+    setup(); 
+  }
+  void setup()
+  {
+    yShift=800;
     tRibbon.resetAnimation();
     sRibbon =new AutoRibbon(550, 800, 600, 800, 5, 580, 1608, 630, 1608,8);
     sRibbon.resetAnimation();
@@ -84,10 +93,6 @@ class ContentConnection extends Sequence
     translate(0, yShift);
     if (0<yShift)
       image(lastImg, 0, -800);
-    else {
-      lastImg = null;
-    }
-
     if ((!tRibbon.doAnimateRecover()) )
       if ((!sRibbon.doAnimateRecover()) )
       {

@@ -36,13 +36,14 @@ class ImagePage extends Sequence
   {
     if (mousePressed)
     {
-      for (int i=0;i<theZone.length;i++)
+     for (int i=0;i<theZone.length;i++)
       {
         if (theZone[i].isIn(x, y))
         {
           yShift=0;
-          return theZone[i].tSequence;
-          
+          Sequence aSeq =theZone[i].tSequence; 
+          aSeq.setup();
+          return aSeq;
         }
       }
     }
@@ -64,7 +65,6 @@ class ActivitiesPage extends ImagePage
   ActivitiesPage(String aLang)
   {
     super(aLang+"/activities.png", 2);
-    yShift=800;
     tagRibbon = new Ribbon(6);
     tagRibbon.addSection(280, -40, 300, 0);
     tagRibbon.addSection(168, 48, 160, 80, 1);
@@ -72,17 +72,20 @@ class ActivitiesPage extends ImagePage
     tagRibbon.addSection(72, 104, 56, 136, 3);
     tagRibbon.addSection(96, 148, 88, 176);
     tagRibbon.addSection(0, 160, 0, 196, 2);
-    tagRibbon.resetAnimation();
     tagImg = loadImage(aLang+"/tag.png");
     theLang = aLang;
-
     addATouchZone(0, 0, 230, 120, theHomePage);
     addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum", 1056, 1104, getImg()));
+    setup();
+  }
+  void setup()
+  {
+     yShift=800;
+     tagRibbon.resetAnimation();
   }
 
   Sequence draw()
   {
-
     if (0<yShift)
       yShift-=(900+yShift)/100;
     tint(255, 255);
@@ -101,7 +104,10 @@ class HomePage extends ImagePage
 {
   HomePage()
   {
-    super("home.png", 6);
+    super("home.png", 1);
+  }
+  void postConstructor()
+  {
     addATouchZone(280, 540, 400, 800, new ActivitiesConnection("en"));
     /*
     addATouchZone(400, 540, 520, 800, new ActivitiesConnection("fr"));
