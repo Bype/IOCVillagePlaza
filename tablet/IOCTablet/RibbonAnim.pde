@@ -1,13 +1,12 @@
-
-
-class EnglishConnection extends Sequence
+class ActivitiesConnection extends Sequence
 {
   Ribbon tagRibbon; 
-  PImage theImg;
   int yShift;
+  Sequence nextSeq;
 
-  EnglishConnection()
+  ActivitiesConnection(String aLang)
   { 
+    super("home.png");
     tagRibbon = new Ribbon(14);
     tagRibbon.addSection(280, 0, 320, 0);
     tagRibbon.addSection(268, 80, 300, 100);
@@ -24,7 +23,7 @@ class EnglishConnection extends Sequence
     tagRibbon.addSection(96, 948, 88, 976);
     tagRibbon.addSection(0, 960, 0, 996);
     tagRibbon.resetAnimation();
-    theImg = loadImage("home.png");
+    nextSeq = new ActivitiesPage(aLang);
     yShift=800;
   }
   Sequence draw()
@@ -37,10 +36,66 @@ class EnglishConnection extends Sequence
         yShift-=-(-900+yShift)/180;
     }
     translate(0, yShift);
-    if(0<yShift)
-      image(theImg, 0, -800);
+    if (0<yShift)
+      image(getImg(), 0, -800);
+    else
+      freeImage();
     if (!tagRibbon.doAnimate())
-      return new ActivitiesPage("en");
+    {
+      tagRibbon.resetAnimation();
+      return nextSeq;
+    }
+    return this;
+  }
+}
+
+class ContentConnection extends Sequence
+{
+  AutoRibbon tRibbon;
+  AutoRibbon sRibbon;
+  Ribbon tagRibbon;
+  PImage lastImg;
+  int yShift;
+  String tLang;
+  String tContent;
+  Sequence tSequence;
+  ContentConnection(String aLang, String aContent, int x1, int x2, PImage anImage)
+  {
+    super(aLang+"/"+aContent+"/0.jpg");
+    tLang = aLang;
+    tContent = aContent;
+    yShift=800;
+    lastImg = anImage;
+    tRibbon =new AutoRibbon(x1, 0, x2, 0, 5, 550, 800, 600, 800,10);
+    tRibbon.resetAnimation();
+    sRibbon =new AutoRibbon(550, 800, 600, 800, 5, 580, 1608, 630, 1608,8);
+    sRibbon.resetAnimation();
+  }
+  Sequence draw()
+  {
+      
+    if (-800<yShift)
+    {
+      if (0<yShift)
+        yShift-=(900+yShift)/200;
+      else
+        yShift-=-(-900+yShift)/180;
+    }
+    translate(0, yShift);
+    if (0<yShift)
+      image(lastImg, 0, -800);
+    else {
+      lastImg = null;
+    }
+
+    if ((!tRibbon.doAnimateRecover()) )
+      if ((!sRibbon.doAnimateRecover()) )
+      {
+        image(tagImg, 0, -yShift);
+        sRibbon.shift(0, -808);
+        return  new ContentPages(tLang, tContent, sRibbon,getImg(),0);
+      }
+    image(tagImg, 0, -yShift);
     return this;
   }
 }

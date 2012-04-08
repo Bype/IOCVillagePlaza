@@ -9,6 +9,12 @@ class RibbonSection
     p2=new PVector(x2, y2);
     theC = aC;
   }
+  RibbonSection(PVector aP1,PVector aP2,int aC)
+  {
+    p1 = aP1;
+    p2 = aP2;
+    theC = aC;
+  }
   void vP1() {
     vertex(p1.x, p1.y);
   }
@@ -25,6 +31,11 @@ class RibbonSection
     vP2();
     aRS.vP2();
     endShape(CLOSE);
+  }
+  void shift(PVector aShift)
+  {
+    p1.add(aShift);
+    p2.add(aShift);
   }
   void drawPercentFrom(RibbonSection aRS, int aPercent)
   {
