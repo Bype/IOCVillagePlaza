@@ -47,6 +47,7 @@ class ActivitiesConnection extends Sequence
       freeImage();
     if (!tagRibbon.doAnimateRecover())
     {
+      nextSeq.setup();
       return nextSeq;
     }
     return this;
