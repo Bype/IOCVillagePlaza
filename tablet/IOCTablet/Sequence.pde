@@ -21,7 +21,7 @@ public class Sequence
     if ((theImageFileName !="") && (theImg == null))
     {       
       System.gc();
-      theImg = loadImage(theImageFileName);
+      theImg = loadImage(""+theImageFileName);
     }
     return theImg;
   }

@@ -46,14 +46,15 @@ class ContentPages extends ImagePage
     {
       if (shiftY < -500)
       {
-        if (-794 < shiftY)
+        if (-799 < shiftY)
         {
-          shiftY -= (800 + shiftY)/4 ;
+          shiftY -= (900 + shiftY)/8 ;
         }
         else
         {
           if (tNb < (nbPage-1))
           {
+            prevImg=null;
             nextRibbon.shift(0, -800);
             return new ContentPages(tLang, tContent, nextRibbon, getImg(),tNb+1);
           }

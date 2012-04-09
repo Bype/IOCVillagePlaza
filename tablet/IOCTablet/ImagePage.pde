@@ -64,7 +64,7 @@ class ActivitiesPage extends ImagePage
   Ribbon tagRibbon;
   ActivitiesPage(String aLang)
   {
-    super(aLang+"/activities.png", 2);
+    super(aLang+"/activities.png", 3);
     tagRibbon = new Ribbon(6);
     tagRibbon.addSection(280, -40, 300, 0);
     tagRibbon.addSection(168, 48, 160, 80, 1);
@@ -75,7 +75,8 @@ class ActivitiesPage extends ImagePage
     tagImg = loadImage(aLang+"/tag.png");
     theLang = aLang;
     addATouchZone(0, 0, 230, 120, theHomePage);
-    addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum", 1056, 1104, getImg()));
+    addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum",7, 1056, 1104, getImg()));
+    addATouchZone(768, 500, 864, 800, new ContentConnection(aLang, "community",2, 768,816, getImg()));
     setup();
   }
   void setup()

@@ -14,7 +14,7 @@ void setup()
   iColor[1] = color(255, 85, 0);// Orange
   iColor[2] = color(0, 153, 255);// Blue
   iColor[3] = color(223, 0, 148);// Pink
-  nbPage = 7;
+  nbPage = 0;
   currentSeq = theHomePage = new HomePage();
   theHomePage.postConstructor();
 }
@@ -25,8 +25,6 @@ void draw()
   background(255);    
   if (currentSeq != null)
     currentSeq = currentSeq.draw();
-  else
-    println("Null Sequence");
- // if ((tick++)%120==0) println("max mem: " + Runtime.getRuntime().totalMemory()/1024 + " / " +Runtime.getRuntime().freeMemory()/1024);
+ if ((tick++)%120==0) println("max mem: " + Runtime.getRuntime().totalMemory()/1024 + " / " +Runtime.getRuntime().freeMemory()/1024);
 }
 
