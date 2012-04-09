@@ -23,7 +23,7 @@ class RibbonSection
   }
   void drawFullFrom(RibbonSection aRS)
   {
-    fill(iColor[theC]);
+    fill(theHomePage.iColor[theC]);
     noStroke();
     beginShape();
     aRS.vP1();
@@ -45,7 +45,7 @@ class RibbonSection
     tP2.mult(aPercent/100.);
     PVector tRP1 = PVector.add(aRS.p1, tP1);
     PVector tRP2 = PVector.add(aRS.p2, tP2);    
-    fill(iColor[theC]);
+    fill(theHomePage.iColor[theC]);
     noStroke();
     beginShape();
     aRS.vP1();
