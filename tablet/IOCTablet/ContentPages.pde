@@ -1,7 +1,7 @@
 class ContentPages extends ImagePage
 {
   Ribbon tRibbon, nextRibbon;
-  PImage prevImg;
+  Sequence prevImg;
   String nextFileName;
   int tNb;
   String tLang;
@@ -10,7 +10,7 @@ class ContentPages extends ImagePage
   int shiftY;
 
 
-  ContentPages(String aLang, String aContent, Ribbon aRibbon, PImage aImg, int nb)
+  ContentPages(String aLang, String aContent, Ribbon aRibbon, Sequence aImg, int nb)
   {
     super(aLang+"/"+aContent+"/"+(nb+1)+".jpg");
     nextRibbon = new AutoRibbon(580, 800, 630, 800, 5, 580, 1600, 630, 1600, 8);
@@ -32,7 +32,7 @@ class ContentPages extends ImagePage
     image(getImg(), 0, 800);
     nextRibbon.drawBg(700, 800, 700, 1600);
     nextRibbon.drawFullRecover(-1);
-    image(prevImg, 0, 0);
+    image(prevImg.getImg(), 0, 0);
     tRibbon.drawBg(700, 0, 700, 800);
     tRibbon.drawFullRecover(-1);
     image(tagImg, 0, -shiftY);
@@ -58,9 +58,8 @@ class ContentPages extends ImagePage
         {
           if (tNb < (theHomePage.nbPage-1))
           {
-            prevImg=null;
             nextRibbon.shift(0, -800);
-            return new ContentPages(tLang, tContent, nextRibbon, getImg(),tNb+1);
+            return new ContentPages(tLang, tContent, nextRibbon, this,tNb+1);
           }
         }
       }

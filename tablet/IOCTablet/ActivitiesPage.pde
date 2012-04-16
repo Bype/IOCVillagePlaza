@@ -17,8 +17,8 @@ class ActivitiesPage extends ImagePage
     tagImg = loadImage(aLang+"/tag.png");
     theLang = aLang;
     addATouchZone(0, 0, 230, 120, theHomePage);
-    addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum",7, 1056, 1104, getImg()));
-    addATouchZone(768, 500, 864, 800, new ContentConnection(aLang, "community",2, 768,816, getImg()));
+    addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum",7, 1056, 1104, this));
+    addATouchZone(768, 500, 864, 800, new ContentConnection(aLang, "community",2, 768,816, this));
     setup();
   }
   void setup()
