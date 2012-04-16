@@ -24,22 +24,22 @@ class ImageCache {
         PImage anImg = (PImage)imageDict.get(aFileName);
         if (null != anImg)
         {
-          return anImg;
+           return anImg;
         }
         else
         {
-          println("miss : " + aFileName);
+         // println("miss : " + aFileName);
         }
       }
       if (null!=imageBuffer[curIndex])
       {
-        println("delete : " + imageBuffer[curIndex]);
+        // println("delete : " + imageBuffer[curIndex]);
         PImage delImg = (PImage)imageDict.get(imageBuffer[curIndex]);
         delImg.delete();
         imageDict.put(imageBuffer[curIndex], null);
         delImg=null;
       }
-      println("load : " + aFileName);
+      // println("load : " + aFileName);
       PImage newImg = loadImage(aFileName);
       imageDict.put(aFileName, newImg);
       imageBuffer[curIndex]=aFileName;

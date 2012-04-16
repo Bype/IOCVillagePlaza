@@ -21,7 +21,7 @@ class ContentPages extends ImagePage
     prevImg = aImg;
     tRibbon = aRibbon;
     shiftY =0;
-    if(theHomePage.videoPage.containsKey(aContent+"/"+nb))
+    if (theHomePage.videoPage.containsKey(aContent+"/"+nb))
     {
       addATouchZone(160, 200, 480, 600, new ActivitiesAction((String)theHomePage.videoPage.get(aContent+"/"+nb)));
     }
@@ -38,28 +38,34 @@ class ContentPages extends ImagePage
     image(tagImg, 0, -shiftY);
     if (mousePressed)
     {
-      
+
       if ((mouseY-pmouseY)<0)
         shiftY += (mouseY-pmouseY);
-        
+
       if (shiftY<-800)
         shiftY=-800;
-        
     }
     else
     {
-      if (shiftY < -500)
+      if (shiftY < -300)
       {
-        if (-799 < shiftY)
+        if (-780 < shiftY)
         {
-          shiftY -= (900 + shiftY)/8 ;
+          shiftY -= (800+shiftY)/4;
         }
         else
         {
-          if (tNb < (theHomePage.nbPage-1))
+          if (-800<shiftY)
           {
-            nextRibbon.shift(0, -800);
-            return new ContentPages(tLang, tContent, nextRibbon, this,tNb+1);
+            shiftY--;
+          }
+          else 
+          {
+            if (tNb < (theHomePage.nbPage-1))
+            {
+              nextRibbon.shift(0, -800);
+              return new ContentPages(tLang, tContent, nextRibbon, this, tNb+1);
+            }
           }
         }
       }

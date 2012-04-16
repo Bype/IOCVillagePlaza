@@ -23,8 +23,7 @@ class ActivitiesConnection extends Sequence
     tagRibbon.addSection(96, 948, 88, 976);
     tagRibbon.addSection(0, 960, 0, 996);
     nextSeq = new ActivitiesPage(aLang);
-    setup();
-   
+    setup();   
   }
   void setup()
   {
@@ -43,8 +42,6 @@ class ActivitiesConnection extends Sequence
     translate(0, yShift);
     if (0<yShift)
       image(getImg(), 0, -800);
-    else
-      freeImage();
     if (!tagRibbon.doAnimateRecover())
     {
       nextSeq.setup();
