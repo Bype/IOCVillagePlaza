@@ -21,6 +21,5 @@ void draw()
   background(255);    
   if (theHomePage.currentSeq != null)
     theHomePage.currentSeq = theHomePage.currentSeq.draw();
-  if ((tick++)%120==0) println("heap : " + Runtime.getRuntime().totalMemory()/1024 + " / free : " +Runtime.getRuntime().freeMemory()/1024);
 }
 

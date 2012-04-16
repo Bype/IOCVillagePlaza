@@ -23,7 +23,7 @@ class HomePage extends ImagePage
     addATouchZone(520, 540, 640, 800, new ActivitiesConnection("es"));
     addATouchZone(640, 540, 760, 800, new ActivitiesConnection("ru"));
     addATouchZone(760, 540, 880, 800, new ActivitiesConnection("ar"));
-    addATouchZone(880, 540, 400, 1000, new ActivitiesConnection("cn"));
+    addATouchZone(880, 540, 1000, 800, new ActivitiesConnection("cn"));
   }
   void addVideo(String aPage, String aUrl)
   {

@@ -9,7 +9,7 @@ class ContentConnection extends Sequence
   String tContent;
   Sequence tSequence;
   int localNb;
- 
+
   ContentConnection(String aLang, String aContent, int aPages, int x1, int x2, Sequence anImage)
   {
     super(aLang+"/"+aContent+"/0.jpg");
@@ -19,15 +19,16 @@ class ContentConnection extends Sequence
     localNb=aPages;
     lastImg = anImage;
     tRibbon =new AutoRibbon(x1, 0, x2, 0, 5, 550, 800, 600, 800, 10);
-    setup();
+    sRibbon =new AutoRibbon(550, 800, 600, 800, 5, 580, 1608, 630, 1608, 8);
   }
   void setup()
   {
     yShift=800;
     theHomePage.nbPage=localNb;
     tRibbon.resetAnimation();
-    sRibbon =new AutoRibbon(550, 800, 600, 800, 5, 580, 1608, 630, 1608, 8);
     sRibbon.resetAnimation();
+    for (int i=0;i<=localNb;i++)
+      theCache.getImg(tLang+"/"+tContent+"/"+i+".jpg");
   }
   Sequence draw()
   {
