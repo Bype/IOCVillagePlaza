@@ -89,33 +89,31 @@ void Animation::loadKeyframes(int index) {
     int howManyFaces = xml.getNumTags("face");
     for(int i=0; i<howManyFaces; i++) {
         
+        // figure out which persona this face is attached to
+        string playerString = xml.getAttribute("face", "player", "A", i);
+        int playerIndex = (char)playerString[0]-65;
+        
         // go into this face
         xml.pushTag("face", i);
         
         // add a face
-        scenarios[index].players.push_back( Players() );
+        scenarios[index].players.push_back( Player() );
         
         // how many keyframes?
         int keyframeCount = xml.getNumTags("keyframe");
         // go through each keyframe
         for(int j=0; j<keyframeCount; j++) {
             
-            // get the timecode of this keyframe
-            float t = xml.getAttribute("keyframe", "time", 0.f, j);
-            
-            // go into this keyframe
-            xml.pushTag("keyframe",j);
-            // go into the source
-            xml.pushTag("source");
             // get the properties 
-            float x = xml.getAttribute("property", "value0", -100.f);
-            float y = xml.getAttribute("property", "value1", -100.f);
+            float t = xml.getAttribute("keyframe", "timePct", 0.f, j);
+            float x = xml.getAttribute("keyframe", "x", -100.f, j);
+            float y = xml.getAttribute("keyframe", "y", -100.f, j);
+            float scaleX = xml.getAttribute("keyframe", "scaleX", 41.f, j) / 100.f;
+            float scaleY = xml.getAttribute("keyframe", "scaleY", 41.f, j) / 100.f;
+            float opacity = xml.getAttribute("keyframe", "opacity", 100.f, j) / 100.f;
             
             // add this keyframe to local data
-            scenarios[index].players[i].keyframes.push_back( Keyframe(x,y,t) );
-            
-            xml.popTag(); // source
-            xml.popTag(); // keyframe #i
+            scenarios[index].players[i].keyframes.push_back( Keyframe(playerIndex,x,y,t,scaleX,scaleY,opacity) );
             
         }
         
@@ -189,24 +187,47 @@ void Animation::draw() {
     ofTranslate(scenarios[current].scale.x, scenarios[current].scale.y);
     ofScale(scenarios[current].scale.width, scenarios[current].scale.height);
     
+    // get position of movie from 0.f > 1.f
+    float t = scenarios[current].movie.getPosition();
+    
     // go through all the players
     for(int i=0; i<scenarios[current].players.size(); i++) {
-        
-        ofPushMatrix();
         
         // get the current player's keyframes
         vector<Keyframe> keyframes = scenarios[current].players[i].keyframes;
         
         // find the right keyframe
-        int index = MIN(keyframes.size()-1,(int)(scenarios[current].movie.getPosition() * keyframes.size()));
+        
+        // find the first keyframe
+        float first = keyframes[0].time;
+        float last  = keyframes[keyframes.size()-1].time;
+        // if we're too early or too late, move on to next
+        if (t < first || t > last) continue;
+        
+        // since we're not too early/late, we can safely start with first keyframe
+        int index = 0;
+        for(int j=1; j<keyframes.size(); j++) {
+            
+            // if we're less than time t, then count us in
+            if (keyframes[j].time < t) index = j;
+            else break; // until we find one that's later than time t
+            
+        }
+        
+        //int index = MIN(keyframes.size()-1,(int)(scenarios[current].movie.getPosition() * keyframes.size()));
         Keyframe keyframe = keyframes[index];
+        
+        ofPushMatrix();
         
         // draw the face
         ofTranslate(keyframe.x, keyframe.y+5);
-        ofScale(0.35f, 0.35f);
-        Personae::Instance().back().draw();
+        ofScale(keyframe.scaleX,keyframe.scaleY);
+        //ofScale(0.41f, 0.41f);
+        ofSetColor(255,255,255,255*keyframe.opacity);
+        Personae::Instance().back(keyframe.player).draw();
         
         ofPopMatrix();
+        
         
     }
     
@@ -218,7 +239,7 @@ void Animation::draw() {
 // MARK: Playback
 
 void Animation::play() {
-    scenarios[current].movie.setSpeed(1.f);
+    scenarios[current].movie.setSpeed(MOVIE_SPEED);
 }
 
 

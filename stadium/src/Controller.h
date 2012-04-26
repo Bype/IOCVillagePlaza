@@ -7,7 +7,6 @@
 
 // My Classes
 
-#include "Photobooth.h"
 #include "Animation.h"
 
 // Main Controller
@@ -40,7 +39,6 @@ public:
     
     //// my class members ////
     
-    Photobooth photobooth;
     Animation animation;
     
     
