@@ -11,26 +11,9 @@
 #include "ofMain.h"
 #include "defines.h"
 
+#include "Scenario.h"
+
 #include "ofxXmlSettings.h"
-
-// Keyframes define positions for the faces
-struct Keyframe {
-    Keyframe(float _x, float _y, float _t) : x(_x), y(_y), time(_t) {};
-    double x,y,time;  
-};
-
-struct Players {
-    vector<Keyframe> keyframes;
-};
-
-struct Scenario {
-    string              name;
-    ofVec2f             ratio;
-    ofRectangle         scale;
-    ofRectangle         rectangle;
-    ofVideoPlayer       movie;
-    vector<Players>     players;
-};
 
 // Animation defines movie playback + keyframe superposition
 class Animation {
