@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples: 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': 'static'}),
+     url(r'^ioc_img/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/home/dolivari/media/ioc_img/'}),
     url(r'^title/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+)/$', 'tcontent.views.title'),
     url(r'^text/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+)/$', 'tcontent.views.text'),
     url(r'^imageurl/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+)/$', 'tcontent.views.imageurl'),
