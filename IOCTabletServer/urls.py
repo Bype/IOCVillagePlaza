@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^imageurl/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+)/$', 'tcontent.views.imageurl'),
     url(r'^image/(?P<lang>\w+)/(?P<topic>\w+)/(?P<page>\d+).jpg', 'tcontent.views.image'),
     #url(r'^IOCTabletServer/', include('IOCTabletServer.foo.urls')),
-
+    url(r'^slideshow/(?P<lang>\w+)/(?P<topic>\w+)','tcontent.views.slideshow'),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
