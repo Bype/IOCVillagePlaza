@@ -3,12 +3,13 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<link rel="stylesheet" href="/media/css/slideshow.css"/>
 		<title>IOC VillagePlaza Backoffice</title>
 	</head>
 	<body>
 		{% for i in imgidx %}
 		<div style="margin-top:16px; margin-bottom:16px">
-			<img style="border-radius: 15px;border:32px solid black" width="640px" height="400px" src='/image/{{lang}}/{{topic}}/{{i}}.jpg'/>
+			<img style="background-image: url('/image/{{lang}}/{{topic}}/{{i}}.jpg')" src="/media/img/secure.png"/>
 		</div>
 		 {% endfor %}
 	</body>
