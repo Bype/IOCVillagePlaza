@@ -38,7 +38,13 @@ def slideshow(request, topic, lang):
                  'imgidx':[i+1 for i in range(len(Page.objects.filter(topic=Topic.objects.get(name=topic))))],
                  })
     return HttpResponse(t.render(c))
-    
+
+def index(request):
+    t = loader.get_template('index.html')
+    c = Context({
+                'topics':Topic.objects.all()
+    })
+    return HttpResponse(t.render(c))
 
 
 def image(request, topic, lang, page):

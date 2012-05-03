@@ -1,0 +1,19 @@
+.ui-widget {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: .9em;
+}
+.ui-button {
+	width: 256px;
+}
+#topic_choice {
+	height: 100%;
+	width: 256px;
+	display: block;
+	
+}
+#topic_view {
+	position:absolute;
+	width: 720px;
+	top:0px;
+	left:320px;
+}
