@@ -59,11 +59,11 @@ def image(request, topic, lang, page):
     im = Image.new('RGBA', (1280, 800), (255, 255, 255, 255))
     draw = ImageDraw.Draw(im)
     im.paste(image, (0, 0))
-    textFont = ImageFont.truetype("fonts/HelveticaLTStd-Roman.otf", 22)
+    textFont = ImageFont.truetype("/home/dolivari/IOCVillagePlaza/IOCTabletServer/fonts/HelveticaLTStd-Roman.otf", 22)
     if len(title) < 32:
-        titleFont = ImageFont.truetype("fonts/HelveticaNeueLTCom-BlkCn.ttf", 40)
+        titleFont = ImageFont.truetype("/home/dolivari/IOCVillagePlaza/IOCTabletServer/fonts/HelveticaNeueLTCom-BlkCn.ttf", 40)
     else:
-        titleFont = ImageFont.truetype("fonts/HelveticaNeueLTCom-BlkCn.ttf", 34)
+        titleFont = ImageFont.truetype("/home/dolivari/IOCVillagePlaza/IOCTabletServer/fonts/HelveticaNeueLTCom-BlkCn.ttf", 34)
     width, height = titleFont.getsize(title)
     draw.text((1260 - width, 50), title, font=titleFont, fill=(32, 32, 32, 255))
     text = mark_safe(normalize_newlines(text))
