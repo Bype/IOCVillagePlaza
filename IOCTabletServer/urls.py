@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^text/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+)/$', 'tcontent.views.text'),
     url(r'^imageurl/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+)/$', 'tcontent.views.imageurl'),
     url(r'^image/(?P<lang>\w+)/(?P<topic>\w+)/(?P<page>\d+).jpg', 'tcontent.views.image'),
+    url(r'^img/(?P<lang>\w+)/(?P<topic>\w+)/(?P<page>\d+).jpg', 'tcontent.views.img'),
     #url(r'^IOCTabletServer/', include('IOCTabletServer.foo.urls')),
     url(r'^slideshow/(?P<lang>\w+)/(?P<topic>\w+)','tcontent.views.slideshow'),
     # Uncomment the admin/doc line below to enable admin documentation:
