@@ -15,6 +15,10 @@ class Topic(models.Model):
                    ('sport_sustain', 'Sustainability'),
                    ('museum', 'Donations to Olympic Museum'),
                    ('olympic_value', 'Olympic Values'),
+                   ('words_olympians','Words of Olympians'),
+                   ('sexual_harassment','Sexual Harassment and Abuse'),
+                   ('healthy_body','Healthy Body Image'),
+                   ('irregular_betting','Fight irregular sports betting')
                     )
     name = models.CharField(max_length=64, choices=TOPIC_CHOICES)
     def __unicode__(self):
