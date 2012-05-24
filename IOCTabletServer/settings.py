@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'iocTabletContent2012',                      # Or path to database file if using sqlite3.
         'USER': 'dolivari',                      # Not used with sqlite3.
         'PASSWORD': '9ricer4',                  # Not used with sqlite3.
-        'HOST': 'my.david-o.net',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -56,11 +56,11 @@ MEDIA_URL = '/media'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'static/'
+STATIC_ROOT = '/home/dolivari/IOCVillagePlaza/IOCTabletServer/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/media/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
