@@ -7,6 +7,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import Context, loader
+import json
 
 def text(request, topic, lang, page):
     try:
@@ -35,7 +36,7 @@ def slideshow(request, topic, lang):
     c = Context({
                  'topic':topic,
                  'lang':lang,
-                 'imgidx':[i+1 for i in range(len(Page.objects.filter(topic=Topic.objects.get(name=topic))))],
+                 'imgidx':[i + 1 for i in range(len(Page.objects.filter(topic=Topic.objects.get(name=topic))))],
                  })
     return HttpResponse(t.render(c))
 
@@ -52,10 +53,10 @@ def image(request, topic, lang, page):
     from django.utils.text import normalize_newlines
     from django.utils.safestring import mark_safe
        
-    dir = settings.MEDIA_ROOT+'/render/'+lang+'/'+topic;
+    dir = settings.MEDIA_ROOT + '/render/' + lang + '/' + topic;
      
-    if os.path.exists(dir+'/'+page+'.jpg'):
-        return HttpResponse(open(dir+'/'+page+'.jpg'),mimetype="image/jpeg")
+    if os.path.exists(dir + '/' + page + '.jpg'):
+        return HttpResponse(open(dir + '/' + page + '.jpg'), mimetype="image/jpeg")
        
     ''' A View that Returns a PNG Image generated using PIL'''
   
@@ -93,7 +94,7 @@ def image(request, topic, lang, page):
     im.save(response, 'jpeg', quality=90)
     if not os.path.exists(dir):
         os.makedirs(dir)
-    im.save(open(dir+'/'+page+'.jpg','w+'),'jpeg', quality=90)
+    im.save(open(dir + '/' + page + '.jpg', 'w+'), 'jpeg', quality=90)
 
     return response # and we're done!
 
@@ -102,10 +103,10 @@ def img(request, topic, lang, page):
     from django.utils.text import normalize_newlines
     from django.utils.safestring import mark_safe
        
-    dir = settings.MEDIA_ROOT+'/render/'+lang+'/'+topic;
+    dir = settings.MEDIA_ROOT + '/render/' + lang + '/' + topic;
      
-    if os.path.exists(dir+'/'+page+'_s.jpg'):
-        return HttpResponse(open(dir+'/'+page+'_s.jpg'),mimetype="image/jpeg")
+    if os.path.exists(dir + '/' + page + '_s.jpg'):
+        return HttpResponse(open(dir + '/' + page + '_s.jpg'), mimetype="image/jpeg")
        
     ''' A View that Returns a PNG Image generated using PIL'''
   
@@ -140,13 +141,18 @@ def img(request, topic, lang, page):
     response = HttpResponse(mimetype="image/jpeg")
     # now, we tell the image to save as a PNG to the 
     # provided file-like object
-    im.thumbnail((640,400), Image.ANTIALIAS)
+    im.thumbnail((640, 400), Image.ANTIALIAS)
     im.save(response, 'jpeg', quality=90)
     if not os.path.exists(dir):
         os.makedirs(dir)
-    im.save(open(dir+'/'+page+'_s.jpg','w+'),'jpeg', quality=90)
+    im.save(open(dir + '/' + page + '_s.jpg', 'w+'), 'jpeg', quality=90)
     return response # and we're done!
 
+def json(request):
+    data = {}
+    for topic in Topic.objects.all():
+        data[topic.name] = len(Page.objects.filter(topic=Topic.objects.get(name=topic)))
+    return HttpResponse(json.dumps(data), content_type="application/json")
 
 
     
