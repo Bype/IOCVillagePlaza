@@ -11,6 +11,8 @@
 #include "ofMain.h"
 #include "Face.h"
 
+
+// class declaration
 class Persona {
     
 public:

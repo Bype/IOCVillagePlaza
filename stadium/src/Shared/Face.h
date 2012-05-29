@@ -10,11 +10,11 @@
 
 #include "ofMain.h"
 
-
 class Face {
     
 public:
     
+    string tag;
     ofImage image;
     ofMesh  mesh;
     

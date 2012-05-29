@@ -10,6 +10,7 @@
 
 void Face::draw() {
     
+    ofEnableAlphaBlending();
     image.draw(-image.width/2,-image.height/2);
     
 }

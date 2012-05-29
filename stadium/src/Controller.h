@@ -8,6 +8,7 @@
 // My Classes
 
 #include "Animation.h"
+#include "ofxOsc.h"
 
 // Main Controller
 
@@ -41,5 +42,8 @@ public:
     
     Animation animation;
     
+    //// OSC ////
+    
+    ofxOscReceiver	osc;
     
 };

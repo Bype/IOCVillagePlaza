@@ -108,9 +108,18 @@ void Personae::addFace(Face &face) {
     
     // first, create a folder to hold this persona
     
-    string filepath = ofToDataPath("players/athletes/");
-    string filename = "";
+    string folder = "athletes";
+    string sub = face.tag.substr(0,3);
+    if ("ATH" == sub) folder = "athletes";
+    if ("FAN" == sub) folder = "fans";
+    if ("PRS" == sub) folder = "press";
+    if ("IOC" == sub) folder = "ioc";
     
+    string filepath = ofToDataPath("players/athletes/");
+    //string filename = "";
+    string filename = face.tag;
+    
+    /*
     int year = ofGetYear();
     int mon  = ofGetMonth();
     int day  = ofGetDay();
@@ -130,6 +139,8 @@ void Personae::addFace(Face &face) {
     else if (mil < 100) filename += "_0";
     else filename += "_";
     filename += ofToString(mil);
+     
+     */
     
     // create a directory with this name
     
@@ -201,4 +212,6 @@ void Personae::addFace(Face &face) {
     // save file
     xml.saveFile(filepath + filename + "/mesh.xml");
     
+    // tell Animation that there's a new sherrif in town
+        
 }
