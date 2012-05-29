@@ -12,7 +12,7 @@ class ContentPages extends ImagePage
 
   ContentPages(String aLang, String aContent, Ribbon aRibbon, Sequence aImg, int nb)
   {
-    super(aLang+"/"+aContent+"/"+(nb+1)+".jpg");
+    super("image/"+aLang+"/"+aContent+"/"+(nb+1)+".jpg");
     nextRibbon = new AutoRibbon(580, 800, 630, 800, 5, 580, 1600, 630, 1600, 8);
     tNb = nb;
     tLang = aLang;

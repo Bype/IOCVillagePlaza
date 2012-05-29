@@ -13,7 +13,7 @@ class ContentConnection extends Sequence
 
   ContentConnection(String aLang, String aContent, int aPages, int x1, int x2, Sequence anImage)
   {
-    super(aLang+"/"+aContent+"/0.jpg");
+    super("image/"+aLang+"/"+aContent+"/1.jpg");
     tLang = aLang;
     tContent = aContent;
     yShift=800;
@@ -68,7 +68,7 @@ class ContentConnection extends Sequence
           sRibbon.drawFullRecover(-1);
           image(tagImg, 0, -yShift);
           sRibbon.shift(0, -808);
-          return  new ContentPages(tLang, tContent, sRibbon, this, 0);
+          return  new ContentPages(tLang, tContent, sRibbon, this, 1);
         }
       }
     image(tagImg, 0, -yShift);

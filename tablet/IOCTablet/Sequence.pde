@@ -72,7 +72,7 @@ public class Sequence
   }
   PImage getImg()
   {
-    return theCache.getImg(""+theImageFileName);
+    return theCache.getImg("http://ioctabletserver.lan/"+theImageFileName);
   }
   void setImage(String aFilename)
   {

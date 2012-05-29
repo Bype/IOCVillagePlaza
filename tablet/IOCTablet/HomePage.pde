@@ -7,7 +7,7 @@ class HomePage extends ImagePage
 
   HomePage()
   {
-    super("home.png");
+    super("media/img/home.png");
     iColor[0] = color(68, 25, 59);// Burgundy
     iColor[1] = color(255, 85, 0);// Orange
     iColor[2] = color(0, 153, 255);// Blue

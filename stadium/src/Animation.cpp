@@ -58,8 +58,8 @@ void Animation::loadScenarios() {
         
         scenarios.back().name = name;
         
-        scenarios.back().movie.loadMovie("animations/" + name + "/" + name + ".mov");
-        scenarios.back().movie.setSpeed(0.f);
+        scenarios.back().movie.loadMovie("animations/" + name + "/" + name + ".mp4");
+        scenarios.back().movie.setSpeed(1.f);
         scenarios.back().movie.play();
         scenarios.back().movie.setLoopState(OF_LOOP_NORMAL);
         

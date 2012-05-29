@@ -6,7 +6,7 @@ class ActivitiesPage extends ImagePage
   Ribbon tagRibbon;
   ActivitiesPage(String aLang)
   {
-    super(aLang+"/activities.png");
+    super("media/img/"+aLang+"/activities.png");
     tagRibbon = new Ribbon(6);
     tagRibbon.addSection(280, -40, 300, 0);
     tagRibbon.addSection(168, 48, 160, 80, 1);
@@ -14,11 +14,11 @@ class ActivitiesPage extends ImagePage
     tagRibbon.addSection(72, 104, 56, 136, 3);
     tagRibbon.addSection(96, 148, 88, 176);
     tagRibbon.addSection(0, 160, 0, 196, 2);
-    tagImg = loadImage(aLang+"/tag.png");
+    tagImg = loadImage("http://ioctabletserver.lan/media/img/"+aLang+"/tag.png");
     theLang = aLang;
     addATouchZone(0, 0, 230, 120, theHomePage);
     addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum",7, 1056, 1104, this));
-    addATouchZone(768, 500, 864, 800, new ContentConnection(aLang, "community",2, 768,816, this));
+    addATouchZone(768, 500, 864, 800, new ContentConnection(aLang, "community_dev",2, 768,816, this));
     setup();
   }
   void setup()

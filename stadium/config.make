@@ -10,7 +10,7 @@ OF_ROOT = /opt/backup/Projects/IOC/src/of_preRelease_v007_linux64/
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS = -I src/Shared
+USER_CFLAGS =-I src/Shared
 
 
 # USER_LDFLAGS allows to pass custom flags to the linker
@@ -21,7 +21,7 @@ USER_LDFLAGS =
 
 
 # use this to add system libraries for example:
-# USER_LIBS = -lpango
+# USER_LIBS = -lpango 
  
 USER_LIBS =
 

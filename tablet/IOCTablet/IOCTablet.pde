@@ -11,8 +11,8 @@ void setup()
   theHomePage = new HomePage();
   theHomePage.postConstructor();
   theHomePage.currentSeq = theHomePage;
-  theHomePage.addVideo("community/0", "/sdcard/ioc/movie/ioc0.mp4");
-  theHomePage.addVideo("community/1", "/sdcard/ioc/movie/ioc1.mp4");
+  theHomePage.addVideo("community_dev/0", "/sdcard/ioc/movie/ioc0.mp4");
+  theHomePage.addVideo("community_dev/1", "/sdcard/ioc/movie/ioc1.mp4");
 }
 
 long tick = 0;

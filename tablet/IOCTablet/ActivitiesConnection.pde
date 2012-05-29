@@ -6,7 +6,7 @@ class ActivitiesConnection extends Sequence
 
   ActivitiesConnection(String aLang)
   { 
-    super("home.png");
+    super("media/img/home.png");
     tagRibbon = new Ribbon(14);
     tagRibbon.addSection(280, 0, 320, 0);
     tagRibbon.addSection(268, 80, 300, 100);
