@@ -49,7 +49,7 @@ public:
     // osc
     ofxOscSender osc;
     void setupOsc();
-    void sendOsc(string identifier);
+    void sendOsc(Face &face);
     
     // loop
     void update();
@@ -63,7 +63,8 @@ public:
     
     // bar-code
     void setTag(string newTag);
-    string tag;
+    string identifier;
+    string type;
     
     // draw
     void draw();

@@ -20,7 +20,11 @@ public:
     
     void setup();
     void exit();
+    
     void update();
+    void updateOsc();
+    void updateFade();
+    
     void draw();
     
     //// interaction ////
@@ -45,5 +49,10 @@ public:
     //// OSC ////
     
     ofxOscReceiver	osc;
+    
+    //// select next ////
+    
+    string selectName;
+    float selectFade;
     
 };

@@ -34,6 +34,8 @@ public:
 	}
     
     void load();
+    void load(string type);
+    void load(string type, string identifier);
     void reload();
 	void addFace(Face &face);
 	

@@ -25,8 +25,25 @@ Personae::~Personae() {
 
 void Personae::load() {
     
+    load("athlete");
+    load("fan");
+    load("ioc");
+    load("press");
+    
+}
+
+
+void Personae::load(string type, string identifier) {
+    
+    
+    
+}
+
+
+void Personae::load(string type) {
+    
     // go into folder to get saved faces
-    string filepath = ofToDataPath("players/athletes/");
+    string filepath = ofToDataPath("players/" + type + "/");
     string filename = "";
     
     ofDirectory dir;
@@ -108,16 +125,12 @@ void Personae::addFace(Face &face) {
     
     // first, create a folder to hold this persona
     
-    string folder = "athletes";
-    string sub = face.tag.substr(0,3);
-    if ("ATH" == sub) folder = "athletes";
-    if ("FAN" == sub) folder = "fans";
-    if ("PRS" == sub) folder = "press";
-    if ("IOC" == sub) folder = "ioc";
+    string folder = face.type;
     
-    string filepath = ofToDataPath("players/athletes/");
+    //string filepath = ofToDataPath("players/athlete/");
+    string filepath = ofToDataPath("players/" + folder + "/");
     //string filename = "";
-    string filename = face.tag;
+    string identifier = face.identifier;
     
     /*
     int year = ofGetYear();
@@ -144,7 +157,7 @@ void Personae::addFace(Face &face) {
     
     // create a directory with this name
     
-    ofDirectory dir(filepath + filename);
+    ofDirectory dir(filepath + identifier);
     if(!dir.exists()){
         dir.create(true);
     }
@@ -156,7 +169,7 @@ void Personae::addFace(Face &face) {
     faces.back().mesh  = face.mesh;
     
     // save the image
-    face.image.saveImage(filepath + filename + "/image.png");
+    face.image.saveImage(filepath + identifier + "image.png");
     
     // save the mesh as an xml file (vertices + textureCoordinates)
     
@@ -210,7 +223,7 @@ void Personae::addFace(Face &face) {
     xml.popTag(); // mesh
     
     // save file
-    xml.saveFile(filepath + filename + "/mesh.xml");
+    xml.saveFile(filepath + identifier + "mesh.xml");
     
     // tell Animation that there's a new sherrif in town
         

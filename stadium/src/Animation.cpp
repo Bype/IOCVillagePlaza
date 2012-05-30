@@ -154,8 +154,10 @@ void Animation::select(string _name) {
         // ok, select it
         select(i);
         // get outta here
-        break;
+        return;
     }
+    
+    cout << "error: could not find an animation named \"" << _name << "\"";
     
 }
 

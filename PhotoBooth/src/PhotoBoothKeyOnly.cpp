@@ -7,6 +7,25 @@ void PhotoBoothKeyOnly::setup(){
     
     coubertin.setup();
     
+    setupOsc();
+    
+}
+
+
+void PhotoBoothKeyOnly::setupOsc() {
+    
+    ofxXmlSettings xml;
+    xml.loadFile("osc.xml");
+    
+    xml.pushTag("osc");
+    string address = xml.getAttribute("ip", "address", "127.0.0.1");
+    int port = xml.getAttribute("port", "value", 9000);
+    
+	// open an outgoing connection to HOST:PORT
+	osc.setup( address, port );
+    
+    xml.popTag(); // osc
+    
 }
 
 //--------------------------------------------------------------
@@ -22,6 +41,64 @@ void PhotoBoothKeyOnly::draw(){
     coubertin.draw();
     
 }
+
+
+// MARK: State
+
+
+void PhotoBoothKeyOnly::toggleCameraVisibility() {
+    
+    
+}
+
+
+void PhotoBoothKeyOnly::toggleStateVisibility() {
+    
+    
+    
+}
+
+
+void PhotoBoothKeyOnly::toggleRotation() {
+    
+    
+}
+
+
+void PhotoBoothKeyOnly::setTag(string newTag) {
+    
+    string identifier = newTag;
+    string type = "athlete";
+    
+    string sub = newTag.substr(0,3);
+    if ("ATH" == sub) type = "athlete";
+    if ("PRS" == sub) type = "press";
+    if ("IOC" == sub) type = "ioc";
+    if ("FAN" == sub) type = "fan";
+    
+    Face face;
+    face.type = type;
+    face.identifier = identifier;
+    
+    sendOsc(face);
+    
+}
+
+
+
+
+
+void PhotoBoothKeyOnly::sendOsc(Face &face) {
+    
+    ofxOscMessage m;
+    m.setAddress( "/select" );
+    m.addStringArg( face.type );
+    m.addStringArg( face.identifier );
+    osc.sendMessage( m );
+    
+}
+
+
 
 //--------------------------------------------------------------
 void PhotoBoothKeyOnly::keyPressed(int key){

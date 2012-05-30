@@ -3,6 +3,11 @@
 #include "ofMain.h"
 #include "Coubertin.h"
 
+// OSC
+#include "ofxOsc.h"
+#include "ofxXmlSettings.h"
+#include "Face.h"
+
 class PhotoBoothKeyOnly : public ofBaseApp {
     
 public:
@@ -10,6 +15,20 @@ public:
     void setup();
     void update();
     void draw();
+    
+    // osc
+    ofxOscSender osc;
+    void setupOsc();
+    void sendOsc(Face &face);
+    
+    ////
+    
+    void toggleCameraVisibility();
+    void toggleStateVisibility();
+    void toggleRotation();
+    void setTag(string newTag);
+    
+    ////
     
     void keyPressed(int key);
     void keyReleased(int key);

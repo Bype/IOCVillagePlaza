@@ -47,7 +47,8 @@ void PhotoBooth::setup() {
     
     athlete.loadImage("personae/athlete.png");
     
-    tag = "ATH00001";
+    type = "athlete";
+    identifier = "ATH00001";
     
     coubertin.setup();
     
@@ -187,7 +188,7 @@ void PhotoBooth::updateState() {
             
             // if no on is present, go back
             if (!present) {
-               changeState(PHOTO_IDLE);
+                changeState(PHOTO_IDLE);
                 break;
             }
             
@@ -452,7 +453,8 @@ void PhotoBooth::rememberFace() {
     faces.push_back(Face());
     faces.back().image = pixels;
     faces.back().mesh  = meanMesh;
-    faces.back().tag   = tag;
+    faces.back().type  = type;
+    faces.back().identifier = identifier;
     
     ofPopStyle();
     
@@ -569,11 +571,19 @@ void PhotoBooth::changeState(photobooth_state newState) {
 
 void PhotoBooth::setTag(string newTag) {
     
-    tag = newTag;
+    identifier = newTag;
+    
+    string sub = newTag.substr(0,3);
+    if ("ATH" == sub) type = "athlete";
+    if ("PRS" == sub) type = "press";
+    if ("IOC" == sub) type = "ioc";
+    if ("FAN" == sub) type = "fan";
+    if ("BAD" == sub) type = "badguy";
     
     // set tag
     for(int i=0; i<faces.size(); i++) {
-        faces[i].tag = newTag;
+        faces[i].type = type;
+        faces[i].identifier = identifier;
     }
     
 }
@@ -763,7 +773,7 @@ void PhotoBooth::mousePressed(int x, int y, int button) {
             // ok, we selected one
             if (0 < faces.size() && yIndex < faces.size()) {
                 Personae::Instance().addFace( faces[yIndex] );
-                sendOsc(faces[yIndex].tag);
+                sendOsc(faces[yIndex]);
             } 
             
             changeState(PHOTO_PLAY);
@@ -782,14 +792,13 @@ void PhotoBooth::mousePressed(int x, int y, int button) {
 
 
 
-void PhotoBooth::sendOsc(string identifier) {
+void PhotoBooth::sendOsc(Face &face) {
     
-     ofxOscMessage m;
-     m.setAddress( "/select" );
-     m.addStringArg( identifier );
-     osc.sendMessage( m );
-    
-    cout << "osc out:" << identifier << endl;
+    ofxOscMessage m;
+    m.setAddress( "/select" );
+    m.addStringArg( face.type );
+    m.addStringArg( face.identifier );
+    osc.sendMessage( m );
     
 }
 

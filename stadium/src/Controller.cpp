@@ -19,6 +19,9 @@ void Controller::setup() {
     
 	osc.setup( 9000 );
     
+    selectFade = 0.f;
+    selectName = "";
+    
 }
 
 
@@ -34,7 +37,39 @@ void Controller::exit() {
 
 void Controller::update() {
     
+    updateFade();
+    updateOsc();
+    
     animation.update();
+    
+}
+
+
+void Controller::updateFade() {
+
+    float fadeSpeed = 0.05f;
+    
+    // fade in
+    if (selectName == "" && selectFade > 0.f) {
+        selectFade = MAX(0.f,selectFade-fadeSpeed);
+    }
+    
+    // fade out
+    if (selectName != "" && selectFade < 1.f) {
+        selectFade = MIN(1.f,selectFade+fadeSpeed);
+    }
+    
+    // fade out complete, change animation
+    if (selectName != "" && selectFade == 1.f) {
+        animation.select(selectName);
+        // ready for next fade out
+        selectName = "";
+    }
+
+}
+
+
+void Controller::updateOsc() {
     
     while( osc.hasWaitingMessages() ) {
         
@@ -42,20 +77,41 @@ void Controller::update() {
 		ofxOscMessage m;
 		osc.getNextMessage( &m );
         
-        if ( m.getAddress() == "/select" )
-		{
-			// both the arguments are int32's
-			string identifier = m.getArgAsString( 0 );
+        if (m.getAddress() == "/play") {
             
-            cout << "identifier:" << identifier << endl;
+            selectName = m.getArgAsString(0);
+            
+        }
+        
+        if ( m.getAddress() == "/select" ) {
+            
+            string type = m.getArgAsString(0);
+			// both the arguments are int32's
+			string identifier = m.getArgAsString(1);
+            
+            cout << "/select\t" << identifier << endl;
 		}
     }
     
 }
 
+
+
+// MARK: Draw
+
 void Controller::draw() {
 	
     animation.draw();
+    
+    // fade out, if necessary
+    if (selectFade > 0.f) {
+        
+        ofEnableAlphaBlending();
+        ofSetColor(255, 255, 255, selectFade*255);
+        ofFill();
+        ofRect(0, 0, ofGetWidth(), ofGetHeight());
+        
+    }
     
 }
 

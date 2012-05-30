@@ -10,6 +10,7 @@
 
 #include "ofMain.h"
 #include "PhotoBooth.h"
+#include "PhotoBoothKeyOnly.h"
 
 class PhotoBoothApp : public ofBaseApp {
     
@@ -29,7 +30,8 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    PhotoBooth photobooth;
+    PhotoBoothKeyOnly photobooth;
+    //PhotoBooth photobooth;
     
     string tag;
     
