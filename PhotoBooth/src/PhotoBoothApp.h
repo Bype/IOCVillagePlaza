@@ -31,5 +31,7 @@ public:
     
     PhotoBooth photobooth;
     
+    string tag;
+    
 };
 

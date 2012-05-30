@@ -17,6 +17,8 @@ void Controller::setup() {
     // by default, cursor is hidden
     ofHideCursor();
     
+	osc.setup( 9000 );
+    
 }
 
 
@@ -33,6 +35,21 @@ void Controller::exit() {
 void Controller::update() {
     
     animation.update();
+    
+    while( osc.hasWaitingMessages() ) {
+        
+		// get the next message
+		ofxOscMessage m;
+		osc.getNextMessage( &m );
+        
+        if ( m.getAddress() == "/select" )
+		{
+			// both the arguments are int32's
+			string identifier = m.getArgAsString( 0 );
+            
+            cout << "identifier:" << identifier << endl;
+		}
+    }
     
 }
 
