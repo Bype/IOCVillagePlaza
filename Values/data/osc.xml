@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<osc>
+
+    <ip address="127.0.0.1" />
+    <port value="9000" />
+                
+</osc>

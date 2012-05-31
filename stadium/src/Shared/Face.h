@@ -14,7 +14,8 @@ class Face {
     
 public:
     
-    string tag;
+    string type;
+    string identifier;
     ofImage image;
     ofMesh  mesh;
     

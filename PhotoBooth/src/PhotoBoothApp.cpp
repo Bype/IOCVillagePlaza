@@ -13,7 +13,7 @@ void PhotoBoothApp::setup(){
     
 	ofBackground(255,255,255);
     
-    tag = "ATH00001";
+    tag = "";
     
     photobooth.setup();
     
@@ -38,7 +38,7 @@ void PhotoBoothApp::keyPressed(int key){
             photobooth.toggleCameraVisibility();
             break;
             
-        caseOF_KEY_DOWN:
+        case OF_KEY_DOWN:
             photobooth.toggleStateVisibility();
             break;
             
@@ -60,6 +60,8 @@ void PhotoBoothApp::keyPressed(int key){
             // add key
             if ((key >= 'A' && key <= 'Z') || (key >= 'a' && key <= 'z') || (key >= '0' && key <= '9')) {
                 tag += key;
+            } else {
+                tag = "";
             }
             break;
             
