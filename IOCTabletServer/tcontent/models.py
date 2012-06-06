@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.conf import settings
+from django.utils.safestring import mark_safe 
 import os
 
 # Create your models here.
@@ -44,10 +45,15 @@ class Text(models.Model):
                     ('cn', 'Chinese'))
     page = models.ForeignKey(Page)
     lang = models.CharField(max_length=2, choices=LANG_CHOICES)
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=256)
     text = models.CharField(max_length=1024)
     def __unicode__(self):
         return u'%s > %s > %s' % (self.page.topic.name, self.page.pos, self.lang)
+    def display_myText(self): 
+        return mark_safe(self.text)
+    def display_myTitle(self): 
+        return mark_safe(self.text)
+    
     def clean(self):
         aPath = settings.MEDIA_ROOT + '/render/' + self.lang + '/' + self.page.topic.name + '/' + str(self.page.pos) + '.jpg'
         if os.path.exists(aPath):

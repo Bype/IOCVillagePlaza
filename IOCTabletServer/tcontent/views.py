@@ -40,6 +40,28 @@ def slideshow(request, topic, lang):
                  })
     return HttpResponse(t.render(c))
 
+def render(request, topic, lang,page):
+    t = loader.get_template('render.html')
+    try:
+        text = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).text
+    except ObjectDoesNotExist:
+        text = "Not found"
+    try:
+        title = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).title
+        title = title.replace('\\n', '\n'); 
+    except ObjectDoesNotExist:
+        title = "Not found"
+    c = Context({
+                 'topic':topic,
+                 'lang':lang,
+                 'page':page,
+                 'title':title,
+                 'text':text,
+                 'imgname':Page.objects.get(pos=page, topic=Topic.objects.get(name=topic)).image
+                 })
+    return HttpResponse(t.render(c))
+
+
 def index(request):
     t = loader.get_template('index.html')
     c = Context({
@@ -76,7 +98,7 @@ def image(request, topic, lang, page):
     text = mark_safe(normalize_newlines(text))
     paragraphs = text.split('\n')
     width, height = textFont.getsize(text)
-    y_text = 450 - (len(text) / 58) * height   
+    y_text = 500 - (len(text) / 58) * height   
     for par in paragraphs:
         if(len(par) == 0):
             y_text += height
