@@ -70,7 +70,7 @@ class AdminImageWidget(AdminFileWidget):
 class PageAdmin(admin.ModelAdmin):
     fields = ('topic', 'pos', 'image')
     list_filter = ('topic__name',)
-    ordering = ('pos',)
+    ordering = ('topic__name','pos')
     inlines = [TextInline, ]
     def formfield_for_dbfield(self, db_field, **kwargs):
         if(db_field.name == 'image'):
