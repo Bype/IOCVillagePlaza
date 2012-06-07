@@ -7,7 +7,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import Context, loader
-import json
+from django.utils import simplejson
 
 def text(request, topic, lang, page):
     try:
@@ -40,7 +40,7 @@ def slideshow(request, topic, lang):
                  })
     return HttpResponse(t.render(c))
 
-def render(request, topic, lang,page):
+def render(request, topic, lang, page):
     t = loader.get_template('render.html')
     try:
         text = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).text
@@ -69,25 +69,6 @@ def index(request):
     })
     return HttpResponse(t.render(c))
 
-
-def image(request, topic, lang, page):
-    import Image, ImageDraw, ImageFont, textwrap
-    from django.utils.text import normalize_newlines
-    from django.utils.safestring import mark_safe
-       
-    dir = settings.MEDIA_ROOT + '/render/' + lang + '/' + topic;
-     
-    if os.path.exists(dir + '/' + page + '.jpg'):
-        return HttpResponse(open(dir + '/' + page + '.jpg'), mimetype="image/jpeg")
-       
-
-    response = HttpResponse(mimetype="image/jpeg")
-    # now, we tell the image to save as a PNG to the 
-    # provided file-like object
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-
-    return response # and we're done!
 
 def img(request, topic, lang, page):
     import Image, ImageDraw, ImageFont, textwrap
@@ -140,10 +121,12 @@ def img(request, topic, lang, page):
     return response # and we're done!
 
 def json(request):
-    data = {}
-    for topic in Topic.objects.all():
-        data[topic.name] = len(Page.objects.filter(topic=Topic.objects.get(name=topic)))
-    return HttpResponse(json.dumps(data), content_type="application/json")
+    data = []
+    for text in Text.objects.all():
+        page ={'topic': text.page.topic.name,'lang':text.lang,'pos':text.page.pos}
+        page['url'] = 'http://ioc.bype.org/render/' + text.page.topic.name + '/' + text.lang + '/' + str(text.page.pos) + '.html'        
+        data.append(page)
+    return HttpResponse(simplejson.dumps(data), content_type="application/json")
 
 
     
