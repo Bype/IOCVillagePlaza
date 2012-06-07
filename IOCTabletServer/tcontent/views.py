@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import Context, loader
 from django.utils import simplejson
+import json
 
 def text(request, topic, lang, page):
     try:
@@ -68,7 +69,6 @@ def index(request):
                 'topics':Topic.objects.all()
     })
     return HttpResponse(t.render(c))
-
 
 def img(request, topic, lang, page):
     import Image, ImageDraw, ImageFont, textwrap
