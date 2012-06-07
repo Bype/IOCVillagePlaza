@@ -9,7 +9,7 @@
 	<body>
 		{% for i in imgidx %}
 		<div style="margin-top:16px; margin-bottom:16px">
-			<img style="background-image: url('/image/{{lang}}/{{topic}}/{{i}}.jpg')" src="/media/img/secure.png"/>
+			<iframe style='border:30px solid black;border-radius: 15px;width:1280px;height:800px;bottom:0px' src="/render/{{topic}}/{{lang}}/{{i}}.html"></iframe>
 		</div>
 		 {% endfor %}
 	</body>

@@ -46,7 +46,7 @@ class Text(models.Model):
     page = models.ForeignKey(Page)
     lang = models.CharField(max_length=2, choices=LANG_CHOICES)
     title = models.CharField(max_length=256)
-    text = models.CharField(max_length=1024)
+    text = models.CharField(max_length=2048)
     def __unicode__(self):
         return u'%s > %s > %s' % (self.page.topic.name, self.page.pos, self.lang)
     def display_myText(self): 
