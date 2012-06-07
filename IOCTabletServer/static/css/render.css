@@ -1,23 +1,21 @@
-
 @font-face {
-	font-family: 'HelveticaNeueLTCom-BlkCn';
-	src: url('HelveticaNeueLTCom-BlkCn.ttf');
-	font-weight: bold;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'HelveticaLTStd-Roman';
+	font-family: 'HelveticaNeueLTCom-Roman';
 	src: url('HelveticaNeueLTCom-Roman.ttf');
 	font-weight: normal;
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'HelveticaNeueLTCom-BlkCn';
+	src: url('HelveticaNeueLTCom-BlkCn.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
 
 body {
 	width: 1280px;
 	height: 800px;
-	font-family: 'HelveticaLTStd-Roman';
+	font-family: 'HelveticaNeueLTCom-Roman';
 	font-size:22px;
 	text-align: justify;
 	overflow:hidden;
@@ -41,9 +39,10 @@ h1 {
 	text-align: right;
 	font-family: 'HelveticaNeueLTCom-BlkCn';
 	font-size: 34px;
+	font-weight: bold;
 }
 p {
-	font-family: 'HelveticaLTStd-Roman';
+	font-family: 'HelveticaNeueLTCom-Roman';
 	font-size:22px;
 }
 li{
