@@ -25,8 +25,25 @@ Personae::~Personae() {
 
 void Personae::load() {
     
+    load("athlete");
+    load("fan");
+    load("ioc");
+    load("press");
+    
+}
+
+
+void Personae::load(string type, string identifier) {
+    
+    
+    
+}
+
+
+void Personae::load(string type) {
+    
     // go into folder to get saved faces
-    string filepath = ofToDataPath("players/athletes/");
+    string filepath = ofToDataPath("players/" + type + "/");
     string filename = "";
     
     ofDirectory dir;
@@ -108,9 +125,14 @@ void Personae::addFace(Face &face) {
     
     // first, create a folder to hold this persona
     
-    string filepath = ofToDataPath("players/athletes/");
-    string filename = "";
+    string folder = face.type;
     
+    //string filepath = ofToDataPath("players/athlete/");
+    string filepath = ofToDataPath("players/" + folder + "/");
+    //string filename = "";
+    string identifier = face.identifier;
+    
+    /*
     int year = ofGetYear();
     int mon  = ofGetMonth();
     int day  = ofGetDay();
@@ -130,10 +152,12 @@ void Personae::addFace(Face &face) {
     else if (mil < 100) filename += "_0";
     else filename += "_";
     filename += ofToString(mil);
+     
+     */
     
     // create a directory with this name
     
-    ofDirectory dir(filepath + filename);
+    ofDirectory dir(filepath + identifier);
     if(!dir.exists()){
         dir.create(true);
     }
@@ -145,7 +169,7 @@ void Personae::addFace(Face &face) {
     faces.back().mesh  = face.mesh;
     
     // save the image
-    face.image.saveImage(filepath + filename + "/image.png");
+    face.image.saveImage(filepath + identifier + "image.png");
     
     // save the mesh as an xml file (vertices + textureCoordinates)
     
@@ -199,6 +223,8 @@ void Personae::addFace(Face &face) {
     xml.popTag(); // mesh
     
     // save file
-    xml.saveFile(filepath + filename + "/mesh.xml");
+    xml.saveFile(filepath + identifier + "mesh.xml");
     
+    // tell Animation that there's a new sherrif in town
+        
 }

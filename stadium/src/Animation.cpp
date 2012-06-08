@@ -58,7 +58,7 @@ void Animation::loadScenarios() {
         
         scenarios.back().name = name;
         
-        scenarios.back().movie.loadMovie("animations/" + name + "/" + name + ".mp4");
+        scenarios.back().movie.loadMovie("animations/" + name + "/" + name + ".mov");
         scenarios.back().movie.setSpeed(1.f);
         scenarios.back().movie.play();
         scenarios.back().movie.setLoopState(OF_LOOP_NORMAL);
@@ -154,8 +154,10 @@ void Animation::select(string _name) {
         // ok, select it
         select(i);
         // get outta here
-        break;
+        return;
     }
+    
+    cout << "error: could not find an animation named \"" << _name << "\"";
     
 }
 

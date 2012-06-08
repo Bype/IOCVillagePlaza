@@ -10,11 +10,12 @@
 
 #include "ofMain.h"
 
-
 class Face {
     
 public:
     
+    string type;
+    string identifier;
     ofImage image;
     ofMesh  mesh;
     

@@ -11,6 +11,8 @@
 #include "ofMain.h"
 #include "Face.h"
 
+
+// class declaration
 class Persona {
     
 public:
@@ -32,6 +34,8 @@ public:
 	}
     
     void load();
+    void load(string type);
+    void load(string type, string identifier);
     void reload();
 	void addFace(Face &face);
 	

@@ -8,6 +8,7 @@
 // My Classes
 
 #include "Animation.h"
+#include "ofxOsc.h"
 
 // Main Controller
 
@@ -19,7 +20,11 @@ public:
     
     void setup();
     void exit();
+    
     void update();
+    void updateOsc();
+    void updateFade();
+    
     void draw();
     
     //// interaction ////
@@ -41,5 +46,13 @@ public:
     
     Animation animation;
     
+    //// OSC ////
+    
+    ofxOscReceiver	osc;
+    
+    //// select next ////
+    
+    string selectName;
+    float selectFade;
     
 };

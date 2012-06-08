@@ -27,6 +27,10 @@
 #include "ofxCv.h"
 #include "ofxFaceTracker.h"
 
+// OSC
+#include "ofxOsc.h"
+#include "ofxXmlSettings.h"
+
 // class
 class PhotoBooth : public ofBaseApp {
     
@@ -42,6 +46,11 @@ public:
     float timeSince(float t) { return ofGetElapsedTimef() - t; }
     void resetTimer(float& t) { t = ofGetElapsedTimef(); }
     
+    // osc
+    ofxOscSender osc;
+    void setupOsc();
+    void sendOsc(Face &face);
+    
     // loop
     void update();
     void updateState();
@@ -51,6 +60,11 @@ public:
     bool detectFace();
     void adjustTilt();
     void findTopRectangle();
+    
+    // bar-code
+    void setTag(string newTag);
+    string identifier;
+    string type;
     
     // draw
     void draw();
@@ -108,6 +122,12 @@ public:
     int                 tiltAngle;
     float               lastTilt;
     void setTiltAngle(int newAngle);
+	
+	// contour
+	ofxCv::ContourFinder contours;
+    ofImage contourImage;
+    ofRectangle contourRectangle;
+    int contourThreshold;
     
     // FaceTracker
 	ofxFaceTracker faceTracker;
@@ -115,12 +135,13 @@ public:
     vector<Face> faces;
     void eraseFaces();
     void rememberFace();
-	
-	// contour
-	ofxCv::ContourFinder contours;
-    ofImage contourImage;
-    ofRectangle contourRectangle;
-    int contourThreshold;
+    
+    // From Face Substitution
+    
+	ofImage src;
+	vector<ofVec2f> srcPoints;
+    ofFbo srcFbo;
+	ofFbo maskFbo;
     
     // the paparazzi photos
     int photoCount;

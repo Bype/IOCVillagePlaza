@@ -34,14 +34,11 @@ void PhotoBooth::setup() {
     resetTimer(lastTilt);
     resetTimer(lastStateChange);
     
-    tiltAngle = 0;
     photoCount = 0;
     
     cameraVisible = false;
     stateVisible = false;
     rotationOn = ROTATION_ON;
-    
-    kinected = false;
     
     setupOpenNI();
     setupFaceTracking();
@@ -50,12 +47,37 @@ void PhotoBooth::setup() {
     
     athlete.loadImage("personae/athlete.png");
     
+    type = "athlete";
+    identifier = "ATH00001";
+    
     coubertin.setup();
+    
+    setupOsc();
+    
+}
+
+
+void PhotoBooth::setupOsc() {
+    
+    ofxXmlSettings xml;
+    xml.loadFile("osc.xml");
+    
+    xml.pushTag("osc");
+    string address = xml.getAttribute("ip", "address", "127.0.0.1");
+    int port = xml.getAttribute("port", "value", 9000);
+    
+	// open an outgoing connection to HOST:PORT
+	osc.setup( address, port );
+    
+    xml.popTag(); // osc
     
 }
 
 
 void PhotoBooth::setupOpenNI() {
+    
+    kinected = false;
+    tiltAngle = 0;
     
     ofxXmlSettings xml;
     xml.loadFile("openni/settings.xml");
@@ -166,7 +188,7 @@ void PhotoBooth::updateState() {
             
             // if no on is present, go back
             if (!present) {
-               changeState(PHOTO_IDLE);
+                changeState(PHOTO_IDLE);
                 break;
             }
             
@@ -431,6 +453,8 @@ void PhotoBooth::rememberFace() {
     faces.push_back(Face());
     faces.back().image = pixels;
     faces.back().mesh  = meanMesh;
+    faces.back().type  = type;
+    faces.back().identifier = identifier;
     
     ofPopStyle();
     
@@ -545,6 +569,25 @@ void PhotoBooth::changeState(photobooth_state newState) {
     
 }
 
+void PhotoBooth::setTag(string newTag) {
+    
+    identifier = newTag;
+    
+    string sub = newTag.substr(0,3);
+    if ("ATH" == sub) type = "athlete";
+    if ("PRS" == sub) type = "press";
+    if ("IOC" == sub) type = "ioc";
+    if ("FAN" == sub) type = "fan";
+    if ("BAD" == sub) type = "badguy";
+    
+    // set tag
+    for(int i=0; i<faces.size(); i++) {
+        faces[i].type = type;
+        faces[i].identifier = identifier;
+    }
+    
+}
+
 
 
 // MARK: Draw
@@ -656,6 +699,8 @@ void PhotoBooth::drawFace() {
     // if no faces
     if (!contours.size()) return;
     
+    ofEnableAlphaBlending();
+    
     contourImage.draw(contourRectangle.x, contourRectangle.y);
     
     ofPushMatrix();
@@ -727,7 +772,8 @@ void PhotoBooth::mousePressed(int x, int y, int button) {
             
             // ok, we selected one
             if (0 < faces.size() && yIndex < faces.size()) {
-                Personae::Instance().addFace( faces[yIndex] ); 
+                Personae::Instance().addFace( faces[yIndex] );
+                sendOsc(faces[yIndex]);
             } 
             
             changeState(PHOTO_PLAY);
@@ -739,6 +785,20 @@ void PhotoBooth::mousePressed(int x, int y, int button) {
         }
         
     }
+    
+}
+
+
+
+
+
+void PhotoBooth::sendOsc(Face &face) {
+    
+    ofxOscMessage m;
+    m.setAddress( "/select" );
+    m.addStringArg( face.type );
+    m.addStringArg( face.identifier );
+    osc.sendMessage( m );
     
 }
 
