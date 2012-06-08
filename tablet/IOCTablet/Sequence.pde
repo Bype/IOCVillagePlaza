@@ -39,7 +39,7 @@ class ImageCache {
         imageDict.put(imageBuffer[curIndex], null);
         delImg=null;
       }
-      // println("load : " + aFileName);
+      //println("load : " + aFileName);
       PImage newImg = loadImage(aFileName);
       imageDict.put(aFileName, newImg);
       imageBuffer[curIndex]=aFileName;
@@ -72,7 +72,7 @@ public class Sequence
   }
   PImage getImg()
   {
-    return theCache.getImg("http://ioctabletserver.lan/"+theImageFileName);
+      return theCache.getImg("http://192.168.1.79/"+theImageFileName);
   }
   void setImage(String aFilename)
   {

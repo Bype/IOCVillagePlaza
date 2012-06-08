@@ -6,7 +6,6 @@ void setup()
 {
   size(1280, 800, P3D);
   frameRate(60);
-
   theCache = new ImageCache();
   theHomePage = new HomePage();
   theHomePage.postConstructor();

@@ -13,7 +13,7 @@ class ContentConnection extends Sequence
 
   ContentConnection(String aLang, String aContent, int aPages, int x1, int x2, Sequence anImage)
   {
-    super("image/"+aLang+"/"+aContent+"/1.jpg");
+    super("media/img/"+aLang+"/"+aContent+"/1.jpg");
     tLang = aLang;
     tContent = aContent;
     yShift=800;
@@ -41,9 +41,9 @@ class ContentConnection extends Sequence
     if (-800<yShift)
     {
       if (0<yShift)
-        yShift-=(900+yShift)/200;
+        yShift-=(900+yShift)/160;
       else
-        yShift-=-(-900+yShift)/180;
+        yShift-=-(-900+yShift)/144;
     }
     translate(0, yShift);
     if (0<yShift)

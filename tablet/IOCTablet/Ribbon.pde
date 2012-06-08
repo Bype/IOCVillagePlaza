@@ -109,9 +109,9 @@ class Ribbon
     if (animPercent<100)
     {
       if (0==animIndex%2)
-        animPercent+=-(animPercent-120)/8;
+        animPercent+=-(animPercent-120)/6;
       else
-        animPercent+=(120-animPercent)/12;
+        animPercent+=(120-animPercent)/10;
     }
     else
     {

@@ -18,7 +18,6 @@ class HomePage extends ImagePage
   void postConstructor()
   {
     addATouchZone(280, 540, 400, 800, new ActivitiesConnection("en"));
-
     addATouchZone(400, 540, 520, 800, new ActivitiesConnection("fr"));
     addATouchZone(520, 540, 640, 800, new ActivitiesConnection("es"));
     addATouchZone(640, 540, 760, 800, new ActivitiesConnection("ru"));
