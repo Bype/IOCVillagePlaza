@@ -66,7 +66,8 @@ def render(request, topic, lang, page):
 def index(request):
     t = loader.get_template('index.html')
     c = Context({
-                'topics':Topic.objects.all()
+                'topics':Topic.objects.all(),
+                'langs' : ['en','fr','es','cn','ar','ru']
     })
     return HttpResponse(t.render(c))
 
@@ -123,7 +124,7 @@ def img(request, topic, lang, page):
 def json(request):
     data = []
     for text in Text.objects.all():
-        page ={'topic': text.page.topic.name,'lang':text.lang,'pos':text.page.pos}
+        page = {'topic': text.page.topic.name, 'lang':text.lang, 'pos':text.page.pos}
         page['url'] = 'http://ioc.bype.org/render/' + text.page.topic.name + '/' + text.lang + '/' + str(text.page.pos) + '.html'        
         data.append(page)
     return HttpResponse(simplejson.dumps(data), content_type="application/json")

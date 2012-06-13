@@ -11,19 +11,46 @@
 	</head>
 	<script>
 		$(document).ready(function($) {
+			var aTopic = "community_dev";
+			var aLang = "en";
 			$('#topic_choice').buttonset();
+			$('#lang_choice').buttonset();
 			$('.topic').click(function() {
-				$("#topic_view").attr('src', '/slideshow/en/' + $(this).attr('id'));
+				aTopic = $(this).attr('id');
+				$("#topic_view").attr('src', '/slideshow/' + aLang + '/' + aTopic);
+			});
+			$('.lang').click(function() {
+				aLang = $(this).attr('id');
+				$("#topic_view").attr('src', '/slideshow/' + aLang + '/' + aTopic);
 			});
 		});
-		
-			
-		</script>
+
+	</script>
 	<body>
-		<div id='topic_choice'>
-			{% for topic in topics %}
-			<input class="topic" type="radio" name="radio" id="{{topic}}"/><label for="{{topic}}">{{topic.get_name_display}}</label>
-			{% endfor %}
-		</div>
-		<iframe style='border:none;width:1400px;height:900px;bottom:0px' id="topic_view" src='/media/img/home.jpg'></iframe></body>
+					<div id='topic_choice'>
+				{% for topic in topics %}
+				<input class="topic" type="radio" name="topic" id="{{topic}}"/>
+				<label for="{{topic}}">{{topic.get_name_display}}</label>
+				{% endfor %}
+			</div>
+			<br>
+			<div id="lang_choice" class="ui-buttonset">
+
+				<input class="lang ui-helper-hidden-accessible" type="radio" name="radio" id="en">
+				<label for="en" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" role="button" aria-disabled="false">English<span class="ui-button-text"></span></label>
+				<input class="lang ui-helper-hidden-accessible" type="radio" name="radio" id="fr">
+				<label for="fr" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">French</span></label>
+				<input class="lang ui-helper-hidden-accessible" type="radio" name="radio" id="es">
+				<label for="es" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Spanish</span></label>
+				<input class="lang ui-helper-hidden-accessible" type="radio" name="radio" id="cn">
+				<label for="cn" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Chinese</span></label>
+				<input class="lang ui-helper-hidden-accessible" type="radio" name="radio" id="ar">
+				<label for="ar" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Arabic</span></label>
+				<input class="lang ui-helper-hidden-accessible" type="radio" name="radio" id="ru">
+				<label for="ru" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button" aria-disabled="false"><span class="ui-button-text">Russian</span></label>
+
+			</div>
+		
+		<iframe style='border:none;width:1400px;height:900px;bottom:0px' id="topic_view" src='/media/img/home.jpg'></iframe>
+	</body>
 </html>

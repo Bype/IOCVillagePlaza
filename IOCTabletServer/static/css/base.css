@@ -6,10 +6,10 @@
 	width: 256px;
 }
 #topic_choice {
-	height: 100%;
+	height: 50%;
 	width: 256px;
 	display: block;
-	
+	top:20px;
 }
 #topic_view {
 	position:absolute;
@@ -17,4 +17,12 @@
 	top:0px;
 	left:320px;
 	border:1px solid grey; 
+}
+
+#lang_choice {
+	height: 50%;
+	width: 256px;
+	display: block;
+	position: absolute;
+	bottom:0px;	
 }
