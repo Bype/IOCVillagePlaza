@@ -4,7 +4,8 @@ class HomePage extends ImagePage
   int nbPage;
   Sequence currentSeq;
   HashMap videoPage;
-
+  HashMap activitiesPage;
+  
   HomePage()
   {
     super("media/img/home.png");
@@ -14,6 +15,7 @@ class HomePage extends ImagePage
     iColor[3] = color(223, 0, 148);// Pink
     nbPage = 0;
     videoPage = new HashMap();
+    activitiesPage = new HashMap();
   }
   void postConstructor()
   {

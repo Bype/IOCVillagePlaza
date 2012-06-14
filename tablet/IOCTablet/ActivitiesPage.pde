@@ -17,7 +17,6 @@ class ActivitiesPage extends ImagePage
     tagImg = loadImage("http://192.168.1.79/media/img/"+aLang+"/tag.png");
     theLang = aLang;
     addATouchZone(0, 0, 230, 120, theHomePage);
-    
     addATouchZone(160,300,240,800,new ContentConnection(aLang, "sexual_harassment",1, 160, 160+48, this));
     addATouchZone(240,300,320,800,new ContentConnection(aLang, "healthy_body",1, 240, 240+48, this));
     addATouchZone(320,300,400,800,new ContentConnection(aLang, "aids_prevention",7, 320, 320+48, this));
@@ -32,12 +31,12 @@ class ActivitiesPage extends ImagePage
     
     addATouchZone(864,500,944,800,new ContentConnection(aLang, "women_sport",5, 864, 864+48, this));
     
-    addATouchZone(960,600,1040,800,new ContentConnection(aLang, "sport_sustain",5, 1040, 1040+48, this));
+    addATouchZone(960,600,1040,800,new ContentConnection(aLang, "sport_sustain",5, 960, 960+48, this));
     
     addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum",8, 1056, 1104, this));
     addATouchZone(1136, 600, 1216, 800, new ContentConnection(aLang, "words_olympians",2, 1136,1136+48, this));
-   
     setup();
+  
   }
   void setup()
   {

@@ -23,12 +23,13 @@ class ActivitiesConnection extends Sequence
     tagRibbon.addSection(96, 948, 88, 976);
     tagRibbon.addSection(0, 960, 0, 996);
     nextSeq = new ActivitiesPage(aLang);
-    setup();   
+    setup();
+    theHomePage.activitiesPage.put(aLang,this);
   }
   void setup()
   {
-     tagRibbon.resetAnimation();
-     yShift=800;
+    tagRibbon.resetAnimation();
+    yShift=800;
   }
   Sequence draw()
   {
@@ -50,5 +51,4 @@ class ActivitiesConnection extends Sequence
     return this;
   }
 }
-
 

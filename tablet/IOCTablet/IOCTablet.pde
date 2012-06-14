@@ -2,6 +2,7 @@
 
 HomePage theHomePage;
 
+
 void setup()
 {
   size(1280, 800, P3D);
@@ -10,8 +11,9 @@ void setup()
   theHomePage = new HomePage();
   theHomePage.postConstructor();
   theHomePage.currentSeq = theHomePage;
-  theHomePage.addVideo("community_dev/0", "/sdcard/ioc/movie/ioc0.mp4");
-  theHomePage.addVideo("community_dev/1", "/sdcard/ioc/movie/ioc1.mp4");
+  theHomePage.addVideo("community_dev/0", "http://192.168.1.79/media/video/test.m3u8");
+  theHomePage.addVideo("community_dev/1", "http://192.168.1.79/media/video/test.m3u8");
+ 
 }
 
 long tick = 0;
