@@ -19,7 +19,8 @@ class Topic(models.Model):
                    ('words_olympians','Words of Olympians'),
                    ('sexual_harassment','Sexual Harassment and Abuse'),
                    ('healthy_body','Healthy Body Image'),
-                   ('irregular_betting','Fight irregular sports betting')
+                   ('irregular_betting','Fight irregular sports betting'),
+                   ('acp','Athlete Career Programme')
                     )
     name = models.CharField(max_length=64, choices=TOPIC_CHOICES)
     def __unicode__(self):
