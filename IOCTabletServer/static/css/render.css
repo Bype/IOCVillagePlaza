@@ -42,12 +42,36 @@ h1 {
 }
 p {
 	font-family: 'HelveticaNeueLTCom-Roman';
-	font-size:22px;
 	text-align: justify;
 }
 li{
 	margin-bottom: 20px;
 }
 small{
-	font-size:16px;
+	font-siz:100%;
+	}
+
+.t2{
+	margin-top:120px;
+	font-size: 28px;
 }
+.t3{
+	margin-top:100px;
+	font-size: 24px;
+}
+.t4{
+	margin-top:80px;
+	font-size: 22px;
+}
+.t5{
+	margin-top:40px;
+	font-size: 20px;
+}
+.t6{
+	margin-top:20px;
+	font-size: 18px;
+}
+
+
+
+
