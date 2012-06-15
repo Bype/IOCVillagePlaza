@@ -17,7 +17,6 @@ body {
 	height: 800px;
 	font-family: 'HelveticaNeueLTCom-Roman';
 	font-size:22px;
-	text-align: justify;
 	overflow:hidden;
 }
 #imgpanel {
@@ -44,10 +43,10 @@ h1 {
 p {
 	font-family: 'HelveticaNeueLTCom-Roman';
 	font-size:22px;
+	text-align: justify;
 }
 li{
 	margin-bottom: 20px;
-	text-align:left;
 }
 small{
 	font-size:16px;
