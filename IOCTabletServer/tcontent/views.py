@@ -45,8 +45,27 @@ def render(request, topic, lang, page):
     t = loader.get_template('render.html')
     try:
         text = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).text
+        range = 1
+        if (len(text) < 256):
+            range = 2
+        else :
+            if (len(text) < 512):
+                range = 3
+            else : 
+                if (len(text) < 768):
+                    range = 4
+                else:
+                    if (len(text) < 1024):
+                        range = 5
+                    else :
+                        range = 6
+        if (lang == "ru"):
+            range = range+1
+        textrange = "t"+str(range)
+        
     except ObjectDoesNotExist:
         text = "Not found"
+        textrange = "t"
     try:
         title = Text.objects.get(lang=lang, page=Page.objects.get(pos=page, topic=Topic.objects.get(name=topic))).title
         title = title.replace('\\n', '\n'); 
@@ -58,6 +77,7 @@ def render(request, topic, lang, page):
                  'page':page,
                  'title':title,
                  'text':text,
+                 'textrange':textrange,
                  'imgname':Page.objects.get(pos=page, topic=Topic.objects.get(name=topic)).image
                  })
     return HttpResponse(t.render(c))
@@ -67,7 +87,7 @@ def index(request):
     t = loader.get_template('index.html')
     c = Context({
                 'topics':Topic.objects.all(),
-                'langs' : ['en','fr','es','cn','ar','ru']
+                'langs' : ['en', 'fr', 'es', 'cn', 'ar', 'ru']
     })
     return HttpResponse(t.render(c))
 
