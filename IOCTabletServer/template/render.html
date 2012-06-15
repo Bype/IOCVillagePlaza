@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{lang}}" {% if lang == 'ar' %} dir='rtl'{% endif %}>
 	<head>
 		<title>{{topic}} | {{lang}} | {{page}}</title>
 		<meta charset="utf-8" />
@@ -8,9 +8,9 @@
 	<body>
 		<div id="imgpanel"><img alt="img" src='/{{imgname}}'/>
 		</div>
-		<div id="txtpanel">
+		<div id="txtpanel" >
 			<h1>{{title|safe}}</h1>
-				{{text|safe}}
+			{{text|safe}}
 		</div>
 	</body>
 </html>
