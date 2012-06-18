@@ -8,7 +8,25 @@ class ActivitiesConnection extends Sequence
   { 
     super("media/img/home.png");
     tagRibbon = new Ribbon(14);
-    tagRibbon.addSection(280, 0, 320, 0);
+
+    if ("en" == aLang) {
+      tagRibbon.addSection(280, 0, 320, 0);
+    }
+    if ("fr" == aLang) {
+      tagRibbon.addSection(400, 0, 440, 0);
+    }
+    if ("es" == aLang) {
+      tagRibbon.addSection(520, 0, 560, 0);
+    }
+    if ("ru" == aLang) {
+      tagRibbon.addSection(640, 0, 680, 0);
+    }
+    if ("ar" == aLang) {
+      tagRibbon.addSection(760, 0, 800, 0);
+    }
+    if ("cn" == aLang) {
+      tagRibbon.addSection(880, 0, 920, 0);
+    }
     tagRibbon.addSection(268, 80, 300, 100);
     tagRibbon.addSection(320, 60, 360, 100);
     tagRibbon.addSection(240, 280, 280, 260);
@@ -24,7 +42,7 @@ class ActivitiesConnection extends Sequence
     tagRibbon.addSection(0, 960, 0, 996);
     nextSeq = new ActivitiesPage(aLang);
     setup();
-    theHomePage.activitiesPage.put(aLang,this);
+    theHomePage.activitiesPage.put(aLang, this);
   }
   void setup()
   {

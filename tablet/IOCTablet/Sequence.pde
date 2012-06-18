@@ -1,4 +1,3 @@
-static PImage tagImg;
 static ImageCache theCache;
 
 class ImageCache {
@@ -8,7 +7,7 @@ class ImageCache {
   String imageBuffer[];
   ImageCache()
   {
-    nbImage=12;
+    nbImage=10;
     curIndex=0;
     imageDict = new HashMap();
     imageBuffer = new String[nbImage];
@@ -28,18 +27,18 @@ class ImageCache {
         }
         else
         {
-         // println("miss : " + aFileName);
+         println("miss : " + aFileName);
         }
       }
       if (null!=imageBuffer[curIndex])
       {
-        // println("delete : " + imageBuffer[curIndex]);
+        println("delete : " + imageBuffer[curIndex]);
         PImage delImg = (PImage)imageDict.get(imageBuffer[curIndex]);
         delImg.delete();
         imageDict.put(imageBuffer[curIndex], null);
         delImg=null;
       }
-      //println("load : " + aFileName);
+      println("load : " + aFileName);
       PImage newImg = loadImage(aFileName);
       imageDict.put(aFileName, newImg);
       imageBuffer[curIndex]=aFileName;

@@ -6,7 +6,7 @@ class ActivitiesPage extends ImagePage
   Ribbon tagRibbon;
   ActivitiesPage(String aLang)
   {
-    super("media/img/"+aLang+"/activities.png");
+    super("media/img/"+aLang+"_activities.png");
     tagRibbon = new Ribbon(6);
     tagRibbon.addSection(280, -40, 300, 0);
     tagRibbon.addSection(168, 48, 160, 80, 1);
@@ -14,7 +14,6 @@ class ActivitiesPage extends ImagePage
     tagRibbon.addSection(72, 104, 56, 136, 3);
     tagRibbon.addSection(96, 148, 88, 176);
     tagRibbon.addSection(0, 160, 0, 196, 2);
-    tagImg = loadImage("http://192.168.1.79/media/img/"+aLang+"/tag.png");
     theLang = aLang;
     addATouchZone(0, 0, 230, 120, theHomePage);
     addATouchZone(160,300,240,800,new ContentConnection(aLang, "sexual_harassment",1, 160, 160+48, this));
@@ -52,7 +51,7 @@ class ActivitiesPage extends ImagePage
     image(getImg(), 0, yShift);
     tagRibbon.drawFullRecover(6);
     tint(255, 255-(255*yShift)/800);
-    image(tagImg, 0, 0);
+    image(theCache.getImg("http://192.168.1.79/media/img/"+theLang+"_tag.png"), 0, 0);
     return testIn(mouseX, mouseY);
   }
 }

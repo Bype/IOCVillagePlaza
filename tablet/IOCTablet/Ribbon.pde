@@ -164,4 +164,3 @@ class Ribbon
     endShape(CLOSE);
   }
 }
-

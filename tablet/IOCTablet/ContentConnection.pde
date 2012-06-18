@@ -62,12 +62,15 @@ class ContentConnection extends Sequence
           image(getImg(), 0, -yShift);
           sRibbon.drawBg(700, 800, 700, 1600);
           sRibbon.drawFullRecover(-1);
-          image(tagImg, 0, -yShift);
+          image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -yShift);
           sRibbon.shift(0, -808);
-          return  new ContentPages(tLang, tContent, sRibbon, this, 1);
+          if (1<localNb)
+            return  new ContentPages(tLang, tContent, sRibbon, this, 1);
+          else
+            return new ContentPages(tLang, tContent, sRibbon, this, 0);
         }
       }
-    image(tagImg, 0, -yShift);
+    image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -yShift);
     return this;
   }
 }

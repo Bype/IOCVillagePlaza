@@ -12,19 +12,17 @@ class ContentPages extends ImagePage
 
   ContentPages(String aLang, String aContent, Ribbon aRibbon, Sequence aImg, int nb)
   {
-    super("media/img/"+aLang+"/"+aContent+"/"+(1<nb?nb+1:1)+".jpg");
-
+    super("media/img/"+aLang+"/"+aContent+"/"+(nb+1)+".jpg");
     nextRibbon = new AutoRibbon(580, 800, 630, 800, 5, 580, 1600, 630, 1600, 8);
     tNb = nb;
     tLang = aLang;
     tContent = aContent;
     prevImg = aImg;
     tRibbon = aRibbon;
-    shiftY =0;
-    if (theHomePage.videoPage.containsKey(aContent+"/"+nb))
-    {
-      addATouchZone(160, 200, 480, 600, new ActivitiesAction((String)theHomePage.videoPage.get(aContent+"/"+nb)));
-    }
+    if(0<nb)
+      theHomePage.populate(this, aContent, nb);
+    else
+      theHomePage.populate(this, aContent, 1);
     addATouchZone(0, 0, 230, 120, (Sequence)theHomePage.activitiesPage.get(aLang));
   }
   Sequence draw()
@@ -36,7 +34,7 @@ class ContentPages extends ImagePage
     image(prevImg.getImg(), 0, 0);
     tRibbon.drawBg(700, 0, 700, 800);
     tRibbon.drawFullRecover(-1);
-    image(tagImg, 0, -shiftY);
+    image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -shiftY);
     if (mousePressed)
     {
       if ((mouseY-pmouseY)<0)
@@ -55,7 +53,7 @@ class ContentPages extends ImagePage
         }
         else 
         {
-          if (tNb < (theHomePage.nbPage-1))
+          if ( (0< tNb) && tNb < (theHomePage.nbPage-1))
           {
             nextRibbon.shift(0, -800);
             return new ContentPages(tLang, tContent, nextRibbon, this, tNb+1);
