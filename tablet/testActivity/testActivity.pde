@@ -5,26 +5,8 @@ import android.content.Intent;
 PImage test;
 void setup()
 {
-  try {
-    Process  proc = Runtime.getRuntime().exec(new String[] {
-      "su", "-c", "service call activity 79 s16 com.android.systemui"
-    }
-    );
-
-    try
-    {
-      proc.waitFor();
-    }
-    catch (java.lang.InterruptedException e)
-    {
-    }
-  }
-  catch(java.io.IOException e)
-  {
-  }
   size(1280, 800, P3D);
   test = loadImage("/sdcard/ioc/home.png");
-  
 }
 
 void draw()
@@ -34,10 +16,10 @@ void draw()
 }
 
 void mousePressed() {
-  Uri uri = Uri.parse("/sdcard/ioc/movie/test.mp4");
+  File file = new File("/sdcard/Storages/education.pdf");
+  Uri uri = Uri.fromFile(file);
   Intent intent = new Intent(Intent.ACTION_VIEW);
-  intent.setDataAndType(uri,"video/*");
-  String t="*/";
+  intent.setDataAndType(uri,"application/pdf");
   startActivity(intent);
 }
 

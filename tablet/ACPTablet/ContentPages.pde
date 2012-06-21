@@ -12,7 +12,7 @@ class ContentPages extends ImagePage
 
   ContentPages(String aLang, String aContent, Ribbon aRibbon, Sequence aImg, int nb)
   {
-    super("media/img/"+aLang+"/"+aContent+"/"+(nb+1)+".jpg");
+    super("/sdcard/Storages/"+aLang+"/acp/"+aContent+".jpg");
     nextRibbon = new AutoRibbon(580, 800, 630, 800, 5, 580, 1600, 630, 1600, 8);
     tNb = nb;
     tLang = aLang;
@@ -34,7 +34,7 @@ class ContentPages extends ImagePage
     image(prevImg.getImg(), 0, 0);
     tRibbon.drawBg(700, 0, 700, 800);
     tRibbon.drawFullRecover(-1);
-    image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -shiftY);
+    image(theCache.getImg("/sdcard/Storages/"+tLang+"_tag.png"), 0, -shiftY);
     if (mousePressed)
     {
       if ((mouseY-pmouseY)<0)

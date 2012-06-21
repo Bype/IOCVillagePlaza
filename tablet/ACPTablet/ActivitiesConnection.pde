@@ -6,7 +6,7 @@ class ActivitiesConnection extends Sequence
 
   ActivitiesConnection(String aLang)
   { 
-    super("media/img/home.png");
+    super("/sdcard/Storages/home.png");
     tagRibbon = new Ribbon(14);
 
     if ("en" == aLang) {

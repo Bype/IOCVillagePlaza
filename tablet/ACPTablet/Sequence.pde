@@ -71,7 +71,7 @@ public class Sequence
   }
   PImage getImg()
   {
-      return theCache.getImg("http://192.168.1.79/"+theImageFileName);
+      return theCache.getImg(theImageFileName);
   }
   void setImage(String aFilename)
   {

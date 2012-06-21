@@ -25,7 +25,7 @@ class HomePage extends ImagePage {
   }
 
   HomePage() {
-    super("media/img/home.png");
+    super("/sdcard/Storages/home.png");
     iColor[0] = color(68, 25, 59);// Burgundy
     iColor[1] = color(255, 85, 0);// Orange
     iColor[2] = color(0, 153, 255);// Blue
@@ -61,7 +61,7 @@ class HomePage extends ImagePage {
         while (it.hasNext ())
         {
           VideoStart aVs = (VideoStart)it.next();
-          aIm.addATouchZone(aVs._xmin, aVs._ymin, aVs._xmax, aVs._ymax, new ActivitiesAction(aVs._url));
+          aIm.addATouchZone(aVs._xmin, aVs._ymin, aVs._xmax, aVs._ymax, new PDFAction(aVs._url));
           println("map : " + aVs._url +"@"+ aVs._xmin+","+ aVs._ymin+","+ aVs._xmax+","+aVs._ymax);
         }
       }

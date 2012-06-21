@@ -13,7 +13,7 @@ class ContentConnection extends Sequence
 
   ContentConnection(String aLang, String aContent, int aPages, int x1, int x2, Sequence anImage)
   {
-    super("media/img/"+aLang+"/"+aContent+"/1.jpg");
+    super("/sdcard/Storages/"+aLang+"/acp/"+aContent+".jpg");
     tLang = aLang;
     tContent = aContent;
     yShift=800;
@@ -62,7 +62,7 @@ class ContentConnection extends Sequence
           image(getImg(), 0, -yShift);
           sRibbon.drawBg(700, 800, 700, 1600);
           sRibbon.drawFullRecover(-1);
-          image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -yShift);
+          image(theCache.getImg("/sdcard/Storages/"+tLang+"_tag.png"), 0, -yShift);
           sRibbon.shift(0, -808);
           if (1<localNb)
             return  new ContentPages(tLang, tContent, sRibbon, this, 1);
@@ -70,7 +70,7 @@ class ContentConnection extends Sequence
             return new ContentPages(tLang, tContent, sRibbon, this, 0);
         }
       }
-    image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -yShift);
+    image(theCache.getImg("/sdcard/Storages/"+tLang+"_tag.png"), 0, -yShift);
     return this;
   }
 }
