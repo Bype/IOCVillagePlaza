@@ -32,10 +32,7 @@ class ImageCache {
       if (null!=imageBuffer[curIndex])
       {
         println("delete : " + imageBuffer[curIndex]);
-        PImage delImg = (PImage)imageDict.get(imageBuffer[curIndex]);
-        delImg.delete();
-        imageDict.put(imageBuffer[curIndex], null);
-        delImg=null;
+        imageDict.remove(imageBuffer[curIndex]);
       }
       println("load : " + aFileName);
       PImage newImg = loadImage(aFileName);

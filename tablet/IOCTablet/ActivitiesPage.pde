@@ -20,8 +20,8 @@ class ActivitiesPage extends ImagePage
     addATouchZone(240,300,320,800,new ContentConnection(aLang, "healthy_body",1, 240, 240+48, this));
     addATouchZone(320,300,400,800,new ContentConnection(aLang, "aids_prevention",7, 320, 320+48, this));
     
-    addATouchZone(416,400,496,800,new ContentConnection(aLang, "olympic_value",4, 416, 416+48, this));
-    addATouchZone(496,400,576,800,new ContentConnection(aLang, "irregular_betting",2, 496, 496+48, this));
+    addATouchZone(416,400,496,800,new ContentConnection(aLang, "museum",4, 416, 416+48, this));
+    addATouchZone(496,400,576,800,new ContentConnection(aLang, "words_olympians",2, 496, 496+48, this));
     
     addATouchZone(592,500,672,800,new ContentConnection(aLang, "community_dev",7, 592, 592+48, this));
     addATouchZone(672,500,752,800,new ContentConnection(aLang, "giving_winning",4, 672, 672+48, this));
@@ -32,10 +32,10 @@ class ActivitiesPage extends ImagePage
     
     addATouchZone(960,600,1040,800,new ContentConnection(aLang, "sport_sustain",5, 960, 960+48, this));
     
-    addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "museum",8, 1056, 1104, this));
-    addATouchZone(1136, 600, 1216, 800, new ContentConnection(aLang, "words_olympians",2, 1136,1136+48, this));
+    addATouchZone(1056, 600, 1136, 800, new ContentConnection(aLang, "olympic_value",8, 1056, 1104, this));
+    addATouchZone(1136, 600, 1216, 800, new ContentConnection(aLang, "irregular_betting",2, 1136,1136+48, this));
     setup();
-  
+ 
   }
   void setup()
   {

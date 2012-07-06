@@ -19,7 +19,7 @@ class ContentPages extends ImagePage
     tContent = aContent;
     prevImg = aImg;
     tRibbon = aRibbon;
-    if(0<nb)
+    if (0<nb)
       theHomePage.populate(this, aContent, nb);
     else
       theHomePage.populate(this, aContent, 1);
@@ -35,36 +35,46 @@ class ContentPages extends ImagePage
     tRibbon.drawBg(700, 0, 700, 800);
     tRibbon.drawFullRecover(-1);
     image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -shiftY);
-    if (mousePressed)
-    {
-      if ((mouseY-pmouseY)<0)
-        shiftY += (mouseY-pmouseY);
-
-      if (shiftY<-800)
-        shiftY=-800;
-    }
+    if (0<tNb)
+      theHomePage.overlay(tContent, tNb);
     else
-    {
-      if (shiftY < -300)
+      theHomePage.overlay(tContent, 1);
+    if ((0< tNb)) 
+      if (mousePressed)
       {
-        if (-800<shiftY)
-        {
-          shiftY-=((800+shiftY)/4+1);
-        }
-        else 
-        {
-          if ( (0< tNb) && tNb < (theHomePage.nbPage-1))
-          {
-            nextRibbon.shift(0, -800);
-            return new ContentPages(tLang, tContent, nextRibbon, this, tNb+1);
-          }
-        }
+        if ((mouseY-pmouseY)<0)
+          shiftY += (mouseY-pmouseY);
+
+        if (shiftY<-800)
+          shiftY=-800;
       }
       else
       {
-        shiftY += -shiftY/4;
+        if (shiftY < -300)
+        {
+          if (-800<shiftY)
+          {
+            shiftY-=((800+shiftY)/4+1);
+          }
+          else 
+          {
+            if (tNb < (theHomePage.nbPage-1))
+            {
+              nextRibbon.shift(0, -800);
+              return new ContentPages(tLang, tContent, nextRibbon, this, tNb+1);
+            }
+            else
+            {
+              translate(0, 0);
+              theHomePage.overlay(tContent, tNb+1);
+            }
+          }
+        }
+        else
+        {
+          shiftY += -shiftY/4;
+        }
       }
-    }
     return testIn(mouseX, mouseY);
   }
 }

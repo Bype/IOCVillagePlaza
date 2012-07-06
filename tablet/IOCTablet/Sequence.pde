@@ -5,9 +5,9 @@ class ImageCache {
   int nbImage;
   int curIndex;
   String imageBuffer[];
-  ImageCache()
+  ImageCache(int aNb)
   {
-    nbImage=10;
+    nbImage=aNb;
     curIndex=0;
     imageDict = new HashMap();
     imageBuffer = new String[nbImage];

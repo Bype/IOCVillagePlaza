@@ -19,7 +19,7 @@ class ContentPages extends ImagePage
     tContent = aContent;
     prevImg = aImg;
     tRibbon = aRibbon;
-    if(0<nb)
+    if (0<nb)
       theHomePage.populate(this, aContent, nb);
     else
       theHomePage.populate(this, aContent, 1);
@@ -35,6 +35,10 @@ class ContentPages extends ImagePage
     tRibbon.drawBg(700, 0, 700, 800);
     tRibbon.drawFullRecover(-1);
     image(theCache.getImg("/sdcard/Storages/"+tLang+"_tag.png"), 0, -shiftY);
+    if (0<tNb)
+      theHomePage.overlay(tContent, tNb);
+    else
+      theHomePage.overlay(tContent, 1);
     if (mousePressed)
     {
       if ((mouseY-pmouseY)<0)

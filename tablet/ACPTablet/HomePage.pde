@@ -3,7 +3,9 @@ class HomePage extends ImagePage {
   int nbPage;
   Sequence currentSeq;
   Map<String, List<VideoStart> > videoPage;
+  Map<String, List<VideoStart> > pdfPage;
   HashMap activitiesPage;
+  PImage tPlay, tPDF;
 
   class VideoStart {
     int _xmin; 
@@ -32,7 +34,10 @@ class HomePage extends ImagePage {
     iColor[3] = color(223, 0, 148);// Pink
     nbPage = 0;
     videoPage = new HashMap<String, List<VideoStart>>();
+    pdfPage = new HashMap<String, List<VideoStart>>();
     activitiesPage = new HashMap();
+    tPlay = loadImage("/sdcard/Storages/play.png");
+    tPDF =  loadImage("/sdcard/Storages/pdf.png");
   }
   void postConstructor() {
     addATouchZone(280, 540, 400, 800, new ActivitiesConnection("en"));
@@ -52,6 +57,13 @@ class HomePage extends ImagePage {
       videoPage.put(aPage, l = new ArrayList<VideoStart>());
     l.add(new VideoStart(xmin, ymin, xmax, ymax, aUrl));
   }
+  void addPDFAt(String aPage, String aUrl, int xmin, int ymin, int xmax, int ymax)
+  {
+    List<VideoStart> l = (List<VideoStart>)pdfPage.get(aPage);
+    if ( l == null)
+      pdfPage.put(aPage, l = new ArrayList<VideoStart>());
+    l.add(new VideoStart(xmin, ymin, xmax, ymax, aUrl));
+  }
   void populate(ImagePage aIm, String aContent, int aNb)
   {
     if (theHomePage.videoPage.containsKey(aContent+"/"+aNb))
@@ -61,8 +73,47 @@ class HomePage extends ImagePage {
         while (it.hasNext ())
         {
           VideoStart aVs = (VideoStart)it.next();
+          aIm.addATouchZone(aVs._xmin, aVs._ymin, aVs._xmax, aVs._ymax, new ActivitiesAction(aVs._url));
+        }
+      }
+    }
+    if (theHomePage.pdfPage.containsKey(aContent+"/"+aNb))
+    {
+      {
+        Iterator it=pdfPage.get(aContent+"/"+aNb).iterator();
+        while (it.hasNext ())
+        {
+          VideoStart aVs = (VideoStart)it.next();
           aIm.addATouchZone(aVs._xmin, aVs._ymin, aVs._xmax, aVs._ymax, new PDFAction(aVs._url));
-          println("map : " + aVs._url +"@"+ aVs._xmin+","+ aVs._ymin+","+ aVs._xmax+","+aVs._ymax);
+        }
+      }
+    }
+  }
+  void overlay(String aContent, int aNb)
+  {
+    if (videoPage.containsKey(aContent+"/"+aNb))
+    {
+      {
+        Iterator it=videoPage.get(aContent+"/"+aNb).iterator();
+        while (it.hasNext ())
+        {
+          VideoStart aVs = (VideoStart)it.next();
+          int x = ((aVs._xmax+aVs._xmin)/2) - 48;
+          int y = ((aVs._ymax+aVs._ymin)/2) - 48;
+          image(tPlay, x, y);
+        }
+      }
+    }
+    if (pdfPage.containsKey(aContent+"/"+aNb))
+    {
+      {
+        Iterator it=pdfPage.get(aContent+"/"+aNb).iterator();
+        while (it.hasNext ())
+        {
+          VideoStart aVs = (VideoStart)it.next();
+          int x = ((aVs._xmax+aVs._xmin)/2) - 64;
+          int y = ((aVs._ymax+aVs._ymin)/2) - 68;
+          image(tPDF, x, y);
         }
       }
     }

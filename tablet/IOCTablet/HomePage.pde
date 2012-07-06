@@ -4,7 +4,9 @@ class HomePage extends ImagePage {
   Sequence currentSeq;
   Map<String, List<VideoStart> > videoPage;
   HashMap activitiesPage;
+  PImage tPlay;
 
+  
   class VideoStart {
     int _xmin; 
     int _ymin; 
@@ -33,6 +35,7 @@ class HomePage extends ImagePage {
     nbPage = 0;
     videoPage = new HashMap<String, List<VideoStart>>();
     activitiesPage = new HashMap();
+    tPlay = loadImage("http://192.168.1.79/media/img/play.png");
   }
   void postConstructor() {
     addATouchZone(280, 540, 400, 800, new ActivitiesConnection("en"));
@@ -43,7 +46,7 @@ class HomePage extends ImagePage {
     addATouchZone(880, 540, 1000, 800, new ActivitiesConnection("cn"));
   }
   void addVideo(String aPage, String aUrl) {
-    addVideoAt(aPage, aUrl, 0, 600, 200, 800);
+    addVideoAt(aPage, aUrl, 0, 600, 600, 800);
   }
   void addVideoAt(String aPage, String aUrl, int xmin, int ymin, int xmax, int ymax)
   {
@@ -54,7 +57,7 @@ class HomePage extends ImagePage {
   }
   void populate(ImagePage aIm, String aContent, int aNb)
   {
-    if (theHomePage.videoPage.containsKey(aContent+"/"+aNb))
+    if (videoPage.containsKey(aContent+"/"+aNb))
     {
       {
         Iterator it=videoPage.get(aContent+"/"+aNb).iterator();
@@ -63,6 +66,22 @@ class HomePage extends ImagePage {
           VideoStart aVs = (VideoStart)it.next();
           aIm.addATouchZone(aVs._xmin, aVs._ymin, aVs._xmax, aVs._ymax, new ActivitiesAction(aVs._url));
           println("map : " + aVs._url +"@"+ aVs._xmin+","+ aVs._ymin+","+ aVs._xmax+","+aVs._ymax);
+        }
+      }
+    }
+  }
+  void overlay(String aContent, int aNb)
+  {
+    if (videoPage.containsKey(aContent+"/"+aNb))
+    {
+      {
+        Iterator it=videoPage.get(aContent+"/"+aNb).iterator();
+        while (it.hasNext ())
+        {
+          VideoStart aVs = (VideoStart)it.next();
+          int x = ((aVs._xmax+aVs._xmin)/2) - 48;
+          int y = ((aVs._ymax+aVs._ymin)/2) - 48;
+          image(tPlay, x, y);
         }
       }
     }

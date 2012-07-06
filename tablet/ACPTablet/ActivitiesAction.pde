@@ -24,11 +24,8 @@ class ActivitiesAction extends Sequence
   }
 }
 
-class PDFAction extends Sequence
+class PDFAction extends ActivitiesAction
 {
-  Uri tUri;
-  Intent tIntent;
-  boolean played;
   PDFAction(String aUrl)
   {
     super("");
@@ -37,14 +34,6 @@ class PDFAction extends Sequence
     tIntent = new Intent(Intent.ACTION_VIEW);
     tIntent.setDataAndType(uri, "application/pdf");
     played = false;
-  }
-  void setup()
-  {
-    if (!played)
-    {
-      played = true;
-      startActivity(tIntent);
-    }
   }
 }
 

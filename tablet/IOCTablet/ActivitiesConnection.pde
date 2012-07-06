@@ -54,9 +54,9 @@ class ActivitiesConnection extends Sequence
     if (-799<yShift)
     {
       if (0<yShift)
-        yShift-=(900+yShift)/160;
+        yShift-=(900+yShift)/120;
       else
-        yShift-=-(-900+yShift)/144;
+        yShift-=-(-900+yShift)/136;
     }
     translate(0, yShift);
     if (0<yShift)
