@@ -39,7 +39,7 @@ class ActivitiesPage extends ImagePage
     tagRibbon.drawFullRecover(6);
     tint(255, 255-(255*yShift)/800);
     image(theCache.getImg("/sdcard/Storages/"+theLang+"_tag.png"), 0, 0);
-    return testIn(mouseX, mouseY);
+    return this;
   }
 }
 

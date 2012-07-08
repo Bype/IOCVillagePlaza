@@ -32,8 +32,6 @@ class ImagePage extends Sequence
   }
   Sequence testIn(int x, int y)
   {
-    if (mousePressed)
-    {
       for (int i=0;i<theZones.size();i++)
       {
         TouchZone aTZ = (TouchZone)theZones.get(i);
@@ -52,7 +50,7 @@ class ImagePage extends Sequence
           }
         }
       }
-    }
+    
     return this;
   }
 

@@ -80,5 +80,9 @@ public class Sequence
   void freeImage()
   {
   }
+  Sequence testIn(int x, int y)
+  {
+    return this;
+  }
 }
 

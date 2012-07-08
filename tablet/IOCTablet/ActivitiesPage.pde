@@ -38,16 +38,8 @@ class ActivitiesPage extends ImagePage
   }
   void setup()
   {
-    if (theHomePage.curLang != theLang)
-    {
       yShift=800; 
       tagRibbon.resetAnimation();
-      theHomePage.curLang=theLang;
-    }
-    else
-    {
-      yShift=800;
-    }
   }
 
   Sequence draw()

@@ -39,37 +39,43 @@ class ContentPages extends ImagePage
       theHomePage.overlay(tContent, tNb);
     else
       theHomePage.overlay(tContent, 1);
-    if (mousePressed)
-    {
-      if ((mouseY-pmouseY)<0)
-        shiftY += (mouseY-pmouseY);
-
-      if (shiftY<-800)
-        shiftY=-800;
-    }
-    else
-    {
-      if (shiftY < -300)
+    if ((0< tNb)) 
+      if (mousePressed)
       {
-        if (-800<shiftY)
-        {
-          shiftY-=((800+shiftY)/4+1);
-        }
-        else 
-        {
-          if ( (0< tNb) && tNb < (theHomePage.nbPage-1))
-          {
-            nextRibbon.shift(0, -800);
-            return new ContentPages(tLang, tContent, nextRibbon, this, tNb+1);
-          }
-        }
+        if ((mouseY-pmouseY)<0)
+          shiftY += (mouseY-pmouseY);
+
+        if (shiftY<-800)
+          shiftY=-800;
       }
       else
       {
-        shiftY += -shiftY/4;
+        if (shiftY < -300)
+        {
+          if (-800<shiftY)
+          {
+            shiftY-=((800+shiftY)/4+1);
+          }
+          else 
+          {
+            if (tNb < (theHomePage.nbPage-1))
+            {
+              nextRibbon.shift(0, -800);
+              return new ContentPages(tLang, tContent, nextRibbon, this, tNb+1);
+            }
+            else
+            {
+              translate(0, 0);
+              theHomePage.overlay(tContent, tNb+1);
+            }
+          }
+        }
+        else
+        {
+          shiftY += -shiftY/4;
+        }
       }
-    }
-    return testIn(mouseX, mouseY);
+    return this;
   }
 }
 
