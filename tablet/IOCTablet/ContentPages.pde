@@ -75,7 +75,7 @@ class ContentPages extends ImagePage
           shiftY += -shiftY/4;
         }
       }
-    return testIn(mouseX, mouseY);
+    return this;
   }
 }
 

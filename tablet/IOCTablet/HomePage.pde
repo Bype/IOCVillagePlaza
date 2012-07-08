@@ -5,8 +5,9 @@ class HomePage extends ImagePage {
   Map<String, List<VideoStart> > videoPage;
   HashMap activitiesPage;
   PImage tPlay;
+  String curLang;
 
-  
+
   class VideoStart {
     int _xmin; 
     int _ymin; 
@@ -28,6 +29,7 @@ class HomePage extends ImagePage {
 
   HomePage() {
     super("media/img/home.png");
+    curLang=null;
     iColor[0] = color(68, 25, 59);// Burgundy
     iColor[1] = color(255, 85, 0);// Orange
     iColor[2] = color(0, 153, 255);// Blue
@@ -36,6 +38,9 @@ class HomePage extends ImagePage {
     videoPage = new HashMap<String, List<VideoStart>>();
     activitiesPage = new HashMap();
     tPlay = loadImage("http://192.168.1.79/media/img/play.png");
+  }
+  void setup() {
+    theHomePage.curLang=null;
   }
   void postConstructor() {
     addATouchZone(280, 540, 400, 800, new ActivitiesConnection("en"));

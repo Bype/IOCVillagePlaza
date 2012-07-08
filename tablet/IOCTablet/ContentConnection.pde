@@ -3,7 +3,7 @@ class ContentConnection extends Sequence
   AutoRibbon tRibbon;
   AutoRibbon sRibbon;
   Ribbon tagRibbon;
-  Sequence lastImg;
+  ActivitiesPage lastImg;
   int yShift;
   String tLang;
   String tContent;
@@ -11,7 +11,7 @@ class ContentConnection extends Sequence
   int localNb;
   int alphaT;  
 
-  ContentConnection(String aLang, String aContent, int aPages, int x1, int x2, Sequence anImage)
+  ContentConnection(String aLang, String aContent, int aPages, int x1, int x2, ActivitiesPage anImage)
   {
     super("media/img/"+aLang+"/"+aContent+"/1.jpg");
     tLang = aLang;

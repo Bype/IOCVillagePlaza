@@ -7,7 +7,7 @@ void setup()
 {
   size(1280, 800, P3D);
   frameRate(60);
-  theCache = new ImageCache(15);
+  theCache = new ImageCache(6);
   theHomePage = new HomePage();
   theHomePage.postConstructor();
   theHomePage.currentSeq = theHomePage;
@@ -41,7 +41,7 @@ void setup()
   theHomePage.addVideoAt("sexual_harassment/1", "/sdcard/Movies/sha_STEPHEN.mp4",388,567,575,781);
 }
 
-long tick = 0;
+
 void draw()
 { 
   background(255);    
@@ -49,3 +49,8 @@ void draw()
     theHomePage.currentSeq = theHomePage.currentSeq.draw();
 }
 
+void mouseReleased()
+{
+  if (theHomePage.currentSeq != null)
+    theHomePage.currentSeq = theHomePage.currentSeq.testIn(mouseX, mouseY);
+}
