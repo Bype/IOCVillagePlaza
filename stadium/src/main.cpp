@@ -1,16 +1,16 @@
 #include "ofMain.h"
-#include "Controller.h"
+#include "AppController.h"
 #include "ofAppGlutWindow.h"
 
 //========================================================================
-int main( ){
+int main(){
 
-    ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1920,540, OF_WINDOW);			// <-------- setup the GL context
+	ofAppGlutWindow window;
+	ofSetupOpenGL(&window, 1280, 400, OF_WINDOW);         // <-------- setup the GL context
 
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:
-	ofRunApp( new Controller());
+	ofRunApp(new AppController());
 
 }

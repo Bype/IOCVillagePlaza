@@ -3,14 +3,14 @@
 # OF_ROOT allows to move projects outside apps/* just set this variable to the
 # absoulte path to the OF root folder
 
-OF_ROOT = /home/dolivari/Projects/IOC/src/of_preRelease_v007_linux64
+OF_ROOT = /home/dolivari/src/of_v0071_linux64_release
 
 
 # USER_CFLAGS allows to pass custom flags to the compiler
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS =-I src/Shared
+USER_CFLAGS =-I src/Face
 
 
 # USER_LDFLAGS allows to pass custom flags to the linker

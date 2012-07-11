@@ -1,25 +1,40 @@
-import android.net.Uri;
-import android.content.Intent;
 
+void saveData(String fileName, String newData, boolean appendData) {
+  BufferedWriter bw = null;
+  try {  
+    FileWriter fw = new FileWriter(fileName, appendData);
+    bw = new BufferedWriter(fw);
+    bw.write(newData + System.getProperty("line.separator"));
+  } 
+  catch (IOException e) {
+    println("error : "+ e);
+  } 
+  finally {
+    if (bw != null) {
+      try { 
+        bw.close();
+      } 
+      catch (IOException e) {
+      }
+    }
+  }
+}
 
-PImage test;
+int n = 0;
+
 void setup()
 {
   size(1280, 800, P3D);
-  test = loadImage("/sdcard/ioc/home.png");
 }
 
 void draw()
 {
-  background(255);    
-  image(test, 0, 0);
+  background(255);
 }
 
-void mousePressed() {
-  File file = new File("/sdcard/Storages/education.pdf");
-  Uri uri = Uri.fromFile(file);
-  Intent intent = new Intent(Intent.ACTION_VIEW);
-  intent.setDataAndType(uri,"application/pdf");
-  startActivity(intent);
+void mouseReleased() {
+  n++;
+  println("data : "+n);
+  saveData("/sdcard/stat.log", "data : "+n, true);
 }
 

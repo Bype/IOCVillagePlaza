@@ -41,8 +41,6 @@ class AutoRibbon extends Ribbon
 
       float rF = int(random(8, 12))*tAmp;
       
-      if (rF < 1)
-        rF = 2;
         
       float rF1 = random(.03, .07)*tAmp*aMag/10;
       float rF2 = aMag*.04;
@@ -83,7 +81,7 @@ class AutoRibbon extends Ribbon
         }
         else
         {
-          float rG = int(random(-4, 4))*5;    
+          float rG = int(random(0, 4))*tAmp;    
           theSection[i].p1.add(PVector.mult(tOrtho1, rG));
           theSection[i].p2.add(PVector.mult(tOrtho1, rG));
         }
