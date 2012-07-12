@@ -6,9 +6,11 @@ class ActivitiesAction extends Sequence
   Uri tUri;
   Intent tIntent;
   boolean played;
+  String aFilename;
   ActivitiesAction(String aUrl)
   {
     super("");
+    aFilename = aUrl;
     tUri = Uri.parse(aUrl);
     tIntent = new Intent(Intent.ACTION_VIEW);
     tIntent.setDataAndType(tUri, "video/*");

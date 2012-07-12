@@ -1,5 +1,6 @@
 static ImageCache theCache;
 
+
 class ImageCache {
   HashMap imageDict;
   int nbImage;
@@ -23,11 +24,11 @@ class ImageCache {
         PImage anImg = (PImage)imageDict.get(aFileName);
         if (null != anImg)
         {
-           return anImg;
+          return anImg;
         }
         else
         {
-         println("miss : " + aFileName);
+          println("miss : " + aFileName);
         }
       }
       if (null!=imageBuffer[curIndex])
@@ -39,6 +40,7 @@ class ImageCache {
         delImg=null;
       }
       println("load : " + aFileName);
+
       PImage newImg = loadImage(aFileName);
       imageDict.put(aFileName, newImg);
       imageBuffer[curIndex]=aFileName;
@@ -71,7 +73,7 @@ public class Sequence
   }
   PImage getImg()
   {
-      return theCache.getImg(theImageFileName);
+    return theCache.getImg(theImageFileName);
   }
   void setImage(String aFilename)
   {

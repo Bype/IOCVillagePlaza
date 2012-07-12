@@ -1,3 +1,24 @@
+void saveData(String fileName, String newData, boolean appendData) {
+  BufferedWriter bw = null;
+  try {  
+    FileWriter fw = new FileWriter(fileName, appendData);
+    bw = new BufferedWriter(fw);
+    bw.write(newData + System.getProperty("line.separator"));
+  } 
+  catch (IOException e) {
+    println("error : "+ e);
+  } 
+  finally {
+    if (bw != null) {
+      try { 
+        bw.close();
+      } 
+      catch (IOException e) {
+      }
+    }
+  }
+}
+
 class ContentConnection extends Sequence
 {
   AutoRibbon tRibbon;
@@ -30,6 +51,7 @@ class ContentConnection extends Sequence
     sRibbon =new AutoRibbon(550, 800, 600, 800, 5, 580, 1608, 630, 1608, 8);
     tRibbon.resetAnimation();
     sRibbon.resetAnimation();
+    saveData("/sdcard/acp_stat.txt", tLang+"/"+tContent, true);
   }
   Sequence draw()
   {

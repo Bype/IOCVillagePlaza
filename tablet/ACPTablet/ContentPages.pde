@@ -1,3 +1,5 @@
+
+
 class ContentPages extends ImagePage
 {
   Ribbon tRibbon, nextRibbon;
@@ -25,6 +27,7 @@ class ContentPages extends ImagePage
       theHomePage.populate(this, aContent, 1);
     addATouchZone(0, 0, 230, 120, (Sequence)theHomePage.activitiesPage.get(aLang));
   }
+ 
   Sequence draw()
   {
     translate(0, shiftY);
