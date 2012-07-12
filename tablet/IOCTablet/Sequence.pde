@@ -51,6 +51,7 @@ class ImageCache {
 
 public class Sequence
 { 
+  
   private PImage theImg;
   String theImageFileName;
   Sequence mParent;
@@ -60,8 +61,7 @@ public class Sequence
   };
   Sequence() {
     theImg=null;
-    theImageFileName="";
-  }
+    theImageFileName="";  }
   Sequence(String aFilename)
   {
     setImage(aFilename);
@@ -71,14 +71,11 @@ public class Sequence
   }
   PImage getImg()
   {
-      return theCache.getImg("http://192.168.1.79/"+theImageFileName);
+      return theCache.getImg("http://"+vpserver+"/"+theImageFileName);
   }
   void setImage(String aFilename)
   {
     theImageFileName = aFilename;
-  }
-  void freeImage()
-  {
   }
   Sequence testIn(int x, int y)
   {

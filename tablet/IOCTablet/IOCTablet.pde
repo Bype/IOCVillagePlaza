@@ -2,6 +2,8 @@
 
 HomePage theHomePage;
 
+static String vpserver;
+
 void fullscreen() {
   try {
     Process  proc = Runtime.getRuntime().exec(new String[] {
@@ -25,9 +27,10 @@ void fullscreen() {
 void setup()
 {
   fullscreen();
+  vpserver = "192.168.10.200";
   size(1280, 800, P3D);
   frameRate(60);
-  theCache = new ImageCache(6);
+  theCache = new ImageCache(15);
   theHomePage = new HomePage();
   theHomePage.postConstructor();
   theHomePage.currentSeq = theHomePage;

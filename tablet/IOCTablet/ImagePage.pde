@@ -58,7 +58,7 @@ class ImagePage extends Sequence
   Sequence draw()
   {
     image(getImg(), 0, 0);
-    return testIn(mouseX, mouseY);
+    return this;
   }
 }
 

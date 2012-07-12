@@ -38,8 +38,8 @@ class ActivitiesPage extends ImagePage
   }
   void setup()
   {
-      yShift=800; 
-      tagRibbon.resetAnimation();
+    yShift=800; 
+    tagRibbon.resetAnimation();
   }
 
   Sequence draw()
@@ -50,11 +50,10 @@ class ActivitiesPage extends ImagePage
     image(getImg(), 0, yShift);
     tagRibbon.drawFullRecover(6);
     tint(255, 255-(255*yShift)/800);
-    image(theCache.getImg("http://192.168.1.79/media/img/"+theLang+"_tag.png"), 0, 0);
+    image(theCache.getImg("http://"+vpserver+"/media/img/"+theLang+"_tag.png"), 0, 0);
     return this;
   }
 }
-
 
 
 

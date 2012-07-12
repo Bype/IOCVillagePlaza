@@ -34,7 +34,7 @@ class ContentPages extends ImagePage
     image(prevImg.getImg(), 0, 0);
     tRibbon.drawBg(700, 0, 700, 800);
     tRibbon.drawFullRecover(-1);
-    image(theCache.getImg("http://192.168.1.79/media/img/"+tLang+"_tag.png"), 0, -shiftY);
+    image(theCache.getImg("http://"+vpserver+"/media/img/"+tLang+"_tag.png"), 0, -shiftY);
     if (0<tNb)
       theHomePage.overlay(tContent, tNb);
     else
