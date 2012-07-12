@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import Context, loader
 from django.utils import simplejson
+from django.core.cache import cache
 import json
 
 def text(request, topic, lang, page):
@@ -149,5 +150,12 @@ def json(request):
         data.append(page)
     return HttpResponse(simplejson.dumps(data), content_type="application/json")
 
+import redis
 
+def stat(request, topic, lang, page):
+        r = redis.Redis(host='192.168.122.1', port=6379, db=0)
+        r.incr(lang+'/'+topic+'/'+page)
+        data = {'result':'success'}
+        return HttpResponse(simplejson.dumps(data), content_type="application/json")
     
+        
