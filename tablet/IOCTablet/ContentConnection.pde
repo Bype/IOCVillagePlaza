@@ -62,7 +62,7 @@ class ContentConnection extends Sequence
           image(getImg(), 0, -yShift);
           sRibbon.drawBg(700, 800, 700, 1600);
           sRibbon.drawFullRecover(-1);
-          image(theCache.getImg("http://"+vpserver+"/media/img/"+tLang+"_tag.png"), 1, -yShift);
+          image(theCache.getImg(vpserver+"/media/img/"+tLang+"_tag.png"), 1, -yShift);
           sRibbon.shift(0, -808);
           if (1<localNb)
             return  new ContentPages(tLang, tContent, sRibbon, this, 1);
@@ -70,7 +70,7 @@ class ContentConnection extends Sequence
             return new ContentPages(tLang, tContent, sRibbon, this, 0);
         }
       }
-    image(theCache.getImg("http://"+vpserver+"/media/img/"+tLang+"_tag.png"), 1, -yShift);
+    image(theCache.getImg(vpserver+"/media/img/"+tLang+"_tag.png"), 1, -yShift);
     return this;
   }
 }

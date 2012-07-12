@@ -24,17 +24,18 @@ int n = 0;
 
 void setup()
 {
-  size(1280, 800, P3D);
+  size(320, 320, P2D);
 }
 
 void draw()
 {
   background(255);
+  line(0,0,320,320);
 }
 
 void mouseReleased() {
   n++;
   println("data : "+n);
-  saveData("/sdcard/stat.log", "data : "+n, true);
+  println(loadStrings("http://ioc.bype.org/stat/museum/en/1.txt"));
 }
 

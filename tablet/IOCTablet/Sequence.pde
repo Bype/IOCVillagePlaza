@@ -71,7 +71,7 @@ public class Sequence
   }
   PImage getImg()
   {
-      return theCache.getImg("http://"+vpserver+"/"+theImageFileName);
+      return theCache.getImg(vpserver+"/"+theImageFileName);
   }
   void setImage(String aFilename)
   {

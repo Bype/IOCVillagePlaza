@@ -35,7 +35,7 @@ class HomePage extends ImagePage {
     nbPage = 0;
     videoPage = new HashMap<String, List<VideoStart>>();
     activitiesPage = new HashMap();
-    tPlay = loadImage("http://"+vpserver+"/media/img/play.png");
+    tPlay = loadImage(vpserver+"/media/img/play.png");
   }
   void postConstructor() {
     addATouchZone(280, 540, 400, 800, new ActivitiesConnection("en"));

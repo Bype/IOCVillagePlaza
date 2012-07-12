@@ -24,6 +24,7 @@ class ContentPages extends ImagePage
     else
       theHomePage.populate(this, aContent, 1);
     addATouchZone(0, 0, 230, 120, (Sequence)theHomePage.activitiesPage.get(aLang));
+    println(loadStrings("http://ioc.bype.org/stat/"+tContent+"/"+tLang+"/"+ nb +".txt"));
   }
   Sequence draw()
   {
@@ -34,7 +35,7 @@ class ContentPages extends ImagePage
     image(prevImg.getImg(), 0, 0);
     tRibbon.drawBg(700, 0, 700, 800);
     tRibbon.drawFullRecover(-1);
-    image(theCache.getImg("http://"+vpserver+"/media/img/"+tLang+"_tag.png"), 0, -shiftY);
+    image(theCache.getImg(vpserver+"/media/img/"+tLang+"_tag.png"), 0, -shiftY);
     if (0<tNb)
       theHomePage.overlay(tContent, tNb);
     else

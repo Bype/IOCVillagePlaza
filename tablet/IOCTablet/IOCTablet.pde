@@ -26,8 +26,8 @@ void fullscreen() {
 
 void setup()
 {
-  fullscreen();
-  vpserver = "192.168.10.200";
+  //fullscreen();
+  vpserver = "/sdcard";
   size(1280, 800, P3D);
   frameRate(60);
   theCache = new ImageCache(15);
