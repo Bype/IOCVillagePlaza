@@ -24,7 +24,7 @@ class ContentPages extends ImagePage
     else
       theHomePage.populate(this, aContent, 1);
     addATouchZone(0, 0, 230, 120, (Sequence)theHomePage.activitiesPage.get(aLang));
-    println(loadStrings("http://ioc.bype.org/stat/"+tContent+"/"+tLang+"/"+ nb +".txt"));
+    println(loadStrings("http://192.168.10.200/ioc/stat/"+tContent+"/"+tLang+"/"+ nb +".txt"));
   }
   Sequence draw()
   {

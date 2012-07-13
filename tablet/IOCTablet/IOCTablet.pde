@@ -26,7 +26,7 @@ void fullscreen() {
 
 void setup()
 {
-  //fullscreen();
+  fullscreen();
   vpserver = "/sdcard";
   size(1280, 800, P3D);
   frameRate(60);
