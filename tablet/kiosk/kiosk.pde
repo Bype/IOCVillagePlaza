@@ -1,33 +1,126 @@
-Ribbon aRibbon[]; 
-color iColor[] = new color[4];
+String[] names = { "cheat", "development", "effort", "giving", "hiv", "museum", "peace", "secrets", "sustainability", "together", "words"};
+String current = "english";
+String[] languageOrder = { "english", "russian", "spanish", "french", "arab", "chinese" };
+int currentIndex = -2;
+PImage logo;
+PImage badge;
+
+int lastTouch = 0;
+
+Langue langue;
+
+ArrayList<Animation> animations = new ArrayList();
 
 void setup() {
-  size(1024, 768, P2D);
-  iColor[0] = color(68, 25, 59);// Burgundy
-  iColor[1] = color(255, 85, 0);// Orange
-  iColor[2] = color(0, 153, 255);// Blue
-  iColor[3] = color(223, 0, 148);// Pink
-  aRibbon = new Ribbon[3];
 
-  int x[] = new int[6];
-  int factor = 64;
-  x[0]=factor;
-  x[1]=x[0]+factor;
-  x[2]=x[1]+factor*2;
-  x[3]=x[2]+factor*3;
-  x[4]=x[3]+(factor*3)/2;
-  x[5]=x[4]+factor*3;
+  size(1024, 768);
 
-  aRibbon[0] = new AutoRibbon(0, x[0], 0, x[1], 3, 1024, x[1], 1024, x[2], 4);
-  aRibbon[1] = new AutoRibbon(1024, x[1], 1024, x[2], 3, 0, x[3], 0, x[4], 4);
-  aRibbon[2] = new AutoRibbon(0, x[3], 0, x[4], 3, 1024, x[4], 1024, x[5], 4);
+  logo = loadImage("logo.png");
+  badge = loadImage("badge.png");
+
   smooth();
+
+  PVector loc;
+
+  for (int i=0; i<names.length; i++) {
+    float h = int(height / 11.0);
+    float y = int(h/2) + (h*i);
+    loc = new PVector(width/2, y);
+    animations.add(new Animation(names[i], loc));
+  }
+
+  langue = new Langue();
+
+  setupScanner();
+  setupRibbon();
+  setupOsc();
 }
 
 void draw() {
-  background(color(255, 255, 255));
-  if ( !aRibbon[0].doAnimateRecover())
-    if ( !aRibbon[1].doAnimate())
-      aRibbon[2].doAnimateRecover();
+
+  background(255);
+  
+  if (currentIndex > -2 && abs(lastTouch - millis()) > 30000) {
+    currentIndex = -2;
+  }
+
+  if (currentIndex == -2) {
+    drawBadge();
+  } else if (currentIndex == -1) {
+    drawLanguage();
+  } 
+  else {
+    drawScenarios();
+  }
+
+
+  //drawRibbon();
+}
+
+
+void drawBadge() {
+  
+  image(badge, width/2-badge.width/2, height/2-badge.height/2);
+  
+  float x = width/2;
+  float y = width/2 - 175;
+  float s = sin(millis()*0.002);
+  y += s * 25;
+  
+  stroke(255,0,0,127);
+  line(x-150,y,x+150,y);
+  
+}
+
+
+void drawLanguage() {
+  
+    drawRibbon();
+    langue.draw();
+}
+
+void drawScenarios() {
+  
+    drawRibbon();
+    image(logo, 20, 0, 100, 100);
+    for (Animation animation : animations) {
+      animation.draw();
+    }
+}
+
+
+void mousePressed() {
+
+  lastTouch = millis();
+  
+  if (currentIndex < 0) {
+    int index = langue.mousePressed(mouseX,mouseY);
+    if (index >= 0) {
+      setupRibbon();
+      currentIndex = index;
+    }
+    return;
+  }
+
+  if (mouseX < 120 && mouseY < 100) {
+    currentIndex = -2;
+      setupRibbon();
+    return;
+  }
+
+  for (Animation animation: animations) {
+    if (animation.mousePressed(mouseX, mouseY)) {
+      play(animation.name);
+      println("play: " + animation.name);
+      break;
+    }
+  }
+}
+
+void keyPressed() {
+
+  lastTouch = millis();
+
+  addToScanner(key);
 }
 
