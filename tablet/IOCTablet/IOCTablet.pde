@@ -46,6 +46,7 @@ void setup()
   theHomePage.addVideoAt("healthy_body/1", "/sdcard/Movies/healthy_body-01b.mp4", 200, 200, 400, 400);
   theHomePage.addVideoAt("healthy_body/1", "/sdcard/Movies/healthy_body-01c.mp4", 200, 400, 400, 600);
   theHomePage.addVideoAt("healthy_body/1", "/sdcard/Movies/healthy_body-01d.mp4", 200, 600, 400, 800);
+  theHomePage.addVideo("women_sport/1","/sdcard/Movies/women-01.mp4");
   theHomePage.addVideo("irregular_betting/1", "/sdcard/Movies/irregular_betting-01.mp4");
   theHomePage.addVideo("museum/6", "/sdcard/Movies/museum-06.mp4");
   theHomePage.addVideoAt("olympic_value/2", "/sdcard/Movies/olympic_value-02a.mp4", 200, 0, 400, 267);

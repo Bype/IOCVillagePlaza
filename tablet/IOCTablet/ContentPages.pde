@@ -65,9 +65,12 @@ class ContentPages extends ImagePage
               return new ContentPages(tLang, tContent, nextRibbon, this, tNb+1);
             }
             else
-            {
-              translate(0, 0);
-              theHomePage.overlay(tContent, tNb+1);
+            { translate(0, 0);
+              fill(64,64,64,64);
+              strokeWeight(4); 
+              if( 0 == (int(millis()/500)%2))
+                ellipse(75, 850, 80, 80);
+              //theHomePage.overlay(tContent, tNb+1);
             }
           }
         }
