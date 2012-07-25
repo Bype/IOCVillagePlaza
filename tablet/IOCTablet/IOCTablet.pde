@@ -36,12 +36,12 @@ void setup()
   theHomePage.currentSeq = theHomePage;
   theHomePage.addVideo("aids_prevention/1", "/sdcard/Movies/aids_prevention-01-marcos.mp4");
   theHomePage.addVideo("aids_prevention/2", "/sdcard/Movies/aids_prevention-02-johnson_ming.mp4");
-  theHomePage.addVideo("aids_prevention/6", "/sdcard/Movies/aids_prevention-07.mp4");
+  theHomePage.addVideo("aids_prevention/4", "/sdcard/Movies/aids_prevention-07.mp4");
   theHomePage.addVideo("community_dev/1", "/sdcard/Movies/community_dev-01-intro.mp4");
   theHomePage.addVideo("community_dev/2", "/sdcard/Movies/community_dev-02-osire.mp4");
   theHomePage.addVideo("community_dev/3", "/sdcard/Movies/community_dev-03-haiti.mp4");
   theHomePage.addVideo("community_dev/4", "/sdcard/Movies/community_dev-04-lusaka.mp4");
-  theHomePage.addVideo("giving_wining/3", "/sdcard/Movies/giving_wining-03.mp4");
+  theHomePage.addVideo("giving_winning/3", "/sdcard/Movies/giving_wining-03.mp4");
   theHomePage.addVideoAt("healthy_body/1", "/sdcard/Movies/healthy_body-01a.mp4", 200, 0, 400, 200);
   theHomePage.addVideoAt("healthy_body/1", "/sdcard/Movies/healthy_body-01b.mp4", 200, 200, 400, 400);
   theHomePage.addVideoAt("healthy_body/1", "/sdcard/Movies/healthy_body-01c.mp4", 200, 400, 400, 600);

@@ -57,6 +57,7 @@ class ImagePage extends Sequence
 
   Sequence draw()
   {
+    tint(255, 255);
     image(getImg(), 0, 0);
     return this;
   }
