@@ -151,11 +151,42 @@ def json(request):
     return HttpResponse(simplejson.dumps(data), content_type="application/json")
 
 import redis
+import datetime
 
-def stat(request, topic, lang, page):
+def stat(request):
         r = redis.Redis(host='192.168.122.1', port=6379, db=0)
-        r.incr(lang+'/'+topic+'/'+page)
-        data = {'result':'success'}
-        return HttpResponse(simplejson.dumps(data), content_type="application/json")
+        topics=Topic.objects.all()
+        langs=['en', 'fr', 'es', 'cn', 'ar', 'ru']
+        data = ""
+        for t in topics:
+                data+=","+t.name;
+        data +="\n"
+        for l in langs:
+                data +=l
+                for t in topics:
+                        s=0
+                        for k in r.keys(t.name+"/"+l+"/*"):
+                                v = r.get(k)
+                                if(v != None):
+                                        s += int(r.get(k))
+                        data += ","+str(s)
+                data +="\n"
+        return HttpResponse(data, content_type="text/csv")
+
+
+def sum(request):
+        r = redis.Redis(host='192.168.122.1', port=6379, db=0)
+        topics=Topic.objects.all()
+        langs=['en', 'fr', 'es', 'cn', 'ar', 'ru']
+	data = str(datetime.datetime.now().date())
+	for t in topics:
+		s=0
+		for l in langs:
+			for k in r.keys(t.name+"/"+l+"/*"):
+				v = r.get(k)
+				if(v != None):
+					s += int(r.get(k))			
+		data +=","+str(s)
+        return HttpResponse(data, content_type="text/plain")
     
         

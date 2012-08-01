@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     #url(r'^IOCTabletServer/', include('IOCTabletServer.foo.urls')),
     url(r'^slideshow/(?P<lang>\w+)/(?P<topic>\w+)','tcontent.views.slideshow'),
     url(r'^render/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+).html','tcontent.views.render'),
-    url(r'^stat/(?P<topic>\w+)/(?P<lang>\w+)/(?P<page>\d+).txt','tcontent.views.stat'),
+    url(r'^stat.csv','tcontent.views.stat'),
+    url(r'^sum.txt','tcontent.views.sum'),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:

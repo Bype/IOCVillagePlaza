@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'iocTabletContent2012',                      # Or path to database file if using sqlite3.
         'USER': 'dolivari',                      # Not used with sqlite3.
         'PASSWORD': '9ricer4',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '192.168.122.1',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
